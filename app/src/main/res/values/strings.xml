@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Submission 4 MVVM</string>
+    <string name="title_film">Title Film</string>
+    <string name="time">release</string>
+    <string name="overview">Overview</string>
+    <string name="image_rating">Image Rating</string>
+    <string name="rating">Rating</string>
+    <string name="image_lang">Image Language</string>
+    <string name="language">Language</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="movies">Movies</string>
+    <string name="tvShows">Tv Shows</string>
+    <string name="favorite">Favorite</string>
+    <string name="lang"> en-US </string>
+    <string name="icon_star">icon star</string>
+    <string name="image_white">image white</string>
+    <string name="lorem">-</string>
+</resources>
