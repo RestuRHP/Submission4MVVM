@@ -146,19 +146,6 @@
 
         </TextView>
 
-        <ImageView
-            android:id="@+id/favorite"
-            android:layout_width="25dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:contentDescription="@string/icon_star"
-            android:src="@drawable/ic_unfavorite"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/img_poster">
-
-        </ImageView>
-
         <ProgressBar
             android:id="@+id/progressBar"
             style="?android:attr/progressBarStyle"

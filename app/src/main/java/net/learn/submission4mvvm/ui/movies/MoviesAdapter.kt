@@ -13,8 +13,10 @@ import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.detail.DetailItem
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_BACKDROP
+import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_ID
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_LANGUAGE
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_OVERVIEW
+import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_POSTER
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RATING
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RELEASE
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_TITLE
@@ -44,13 +46,14 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
                      .into(img_poster)
                  itemView.setOnClickListener{
                      val intent = Intent(itemView.context, DetailItem::class.java)
-                     intent.putExtra("id", movies.id)
+                     intent.putExtra(EX_ID, movies.id)
                      intent.putExtra(EX_TITLE,movies.title)
                      intent.putExtra(EX_RELEASE, movies.releaseDate)
                      intent.putExtra(EX_RATING, movies.voteAverage)
                      intent.putExtra(EX_LANGUAGE, movies.originalLanguage)
                      intent.putExtra(EX_OVERVIEW, movies.overview)
                      intent.putExtra(EX_BACKDROP, movies.backdropPath)
+                     intent.putExtra(EX_POSTER, movies.posterPath)
                      itemView.context.startActivity(intent)
                  }
              }

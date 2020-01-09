@@ -7,6 +7,7 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
+import net.learn.submission4mvvm.ui.favorite.FavoriteFragment
 import net.learn.submission4mvvm.ui.movies.MoviesFragment
 import net.learn.submission4mvvm.ui.tvshows.TvShowsFragment
 
@@ -23,21 +24,22 @@ class MainActivity : AppCompatActivity() {
     private val mOnNavigationItemSelectedListener = BottomNavigationView.OnNavigationItemSelectedListener { menuItem: MenuItem ->
         when (menuItem.itemId) {
             R.id.navigation_movies -> {
-                val title="Movies"
+//                val title="Movies"
                 setActionBarTitle(getString(R.string.movies))
                 addFragment(MoviesFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_tvshows ->{
-                val title="Tv Shows"
+//                val title="Tv Shows"
                 setActionBarTitle(getString(R.string.tvShows))
                 addFragment(TvShowsFragment())
                 return@OnNavigationItemSelectedListener true
             }
             R.id.navigation_favorite ->{
-                val title="Movies"
+//                val title="Movies"
                 setActionBarTitle(getString(R.string.favorite))
-                Log.d("Test","Favorite Clicked")
+                addFragment(FavoriteFragment())
+                return@OnNavigationItemSelectedListener true
             }
         }
         false

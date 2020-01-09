@@ -11,7 +11,7 @@
     <string name = "image_poster"> Poster Gambar </string>
     <string name = "movies"> Film </string>
     <string name = "tvShows"> Acara TV </string>
-    <string name = "favorite"> Favorite </string>
+    <string name = "favorite"> Favorit </string>
     <string name = "lang"> ID </string>
     <string name="icon_star">icon star</string>
     <string name="image_white">image white</string>
