@@ -4,7 +4,7 @@ import android.provider.BaseColumns
 
 internal class DBFavorite {
 
-    internal class Colums : BaseColumns {
+    internal class Columns : BaseColumns {
         companion object{
             const val TABLE_NAME = "tb_favorite"
             const val _ID = "fId"
@@ -16,6 +16,7 @@ internal class DBFavorite {
             const val OVERVIEW = "overview"
             const val RELEASE_DATE = "releaseDate"
             const val RATING = "voteAverage"
+            const val fTYPE = "fType"
         }
     }
 

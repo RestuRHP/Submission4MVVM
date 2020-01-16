@@ -29,6 +29,7 @@ class DetailItem : AppCompatActivity() {
     private lateinit var helper:Helper
 
     private var fId = 0
+    private var fType = ""
     private var id = 0
     private var title = ""
     private var backdrop = ""
@@ -42,9 +43,10 @@ class DetailItem : AppCompatActivity() {
     var isFavorite = false
 
     companion object {
-        const val EX_FID = "extra_fid"
-        const val EX_ID = "extra_id"
-        const val EX_TITLE = "extra_movie"
+        const val EX_FID = "ex_fid"
+        const val EX_TYPE = "ex_type"
+        const val EX_ID = "ex_id"
+        const val EX_TITLE = "ex_title"
         const val EX_RELEASE = "ex_Release"
         const val EX_RATING = "ex_rating"
         const val EX_LANGUAGE = "ex_language"
@@ -62,6 +64,7 @@ class DetailItem : AppCompatActivity() {
 
         showLoading(true)
 
+
         val extras =intent.extras
         if (extras != null){
             showDetail(extras)
@@ -69,6 +72,8 @@ class DetailItem : AppCompatActivity() {
             finish()
         }
         check()
+
+
     }
 
     private fun check(){
@@ -124,14 +129,15 @@ class DetailItem : AppCompatActivity() {
 
     private fun addToFavorite() {
         val values= ContentValues()
-        values.put(DBFavorite.Colums.ID,id)
-        values.put(DBFavorite.Colums.TITLE,title)
-        values.put(DBFavorite.Colums.BACKDROP,backdrop)
-        values.put(DBFavorite.Colums.ORIGINAL_LANG,language)
-        values.put(DBFavorite.Colums.POSTER,poster)
-        values.put(DBFavorite.Colums.OVERVIEW,overview)
-        values.put(DBFavorite.Colums.RELEASE_DATE,release)
-        values.put(DBFavorite.Colums.RATING,rating)
+        values.put(DBFavorite.Columns.fTYPE,fType)
+        values.put(DBFavorite.Columns.ID,id)
+        values.put(DBFavorite.Columns.TITLE,title)
+        values.put(DBFavorite.Columns.BACKDROP,backdrop)
+        values.put(DBFavorite.Columns.ORIGINAL_LANG,language)
+        values.put(DBFavorite.Columns.POSTER,poster)
+        values.put(DBFavorite.Columns.OVERVIEW,overview)
+        values.put(DBFavorite.Columns.RELEASE_DATE,release)
+        values.put(DBFavorite.Columns.RATING,rating)
 
         helper.open()
         helper.insert(values)
@@ -152,6 +158,7 @@ class DetailItem : AppCompatActivity() {
 
     private fun showDetail(extras: Bundle) {
         fId = extras.getInt(EX_FID,0)
+        fType = extras.getString(EX_TYPE, "")
         id = extras.getInt(EX_ID,0)
         title = extras.getString(EX_TITLE,"")
         backdrop = extras.getString(EX_BACKDROP,"")
@@ -172,6 +179,7 @@ class DetailItem : AppCompatActivity() {
             .dontAnimate()
             .into(img_poster)
         showLoading(false)
+        Log.d("Get Type Fragment", fType)
     }
 
     private fun showLoading(state: Boolean) {

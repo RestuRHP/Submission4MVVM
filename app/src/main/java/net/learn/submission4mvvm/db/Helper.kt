@@ -4,13 +4,14 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
-import net.learn.submission4mvvm.db.DBFavorite.Colums.Companion._ID
+import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.fTYPE
+import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion._ID
 import java.sql.SQLException
 
 class Helper(context: Context) {
 
     companion object{
-        private const val DATABASE_TABLE = DBFavorite.Colums.TABLE_NAME
+        private const val DATABASE_TABLE = DBFavorite.Columns.TABLE_NAME
         private lateinit var dataHelper:DatabaseHelper
         private lateinit var dataBase: SQLiteDatabase
     }
@@ -47,6 +48,18 @@ class Helper(context: Context) {
             null,
             "$_ID = ?",
             arrayOf(id),
+            null,
+            null,
+            null,
+            null)
+    }
+
+    fun queryByType(type:String):Cursor{
+        return dataBase.query(
+            DATABASE_TABLE,
+            null,
+            "$fTYPE = ?",
+            arrayOf(type),
             null,
             null,
             null,

@@ -52,6 +52,7 @@ class MoviesFragment : Fragment() {
         })
         viewModel.setMovies()
         showLoading(true)
+
     }
 
     private fun showLoading(state: Boolean) {

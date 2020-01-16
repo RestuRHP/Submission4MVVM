@@ -24,6 +24,10 @@ import java.util.ArrayList
 
 class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
 
+    companion object{
+        const val type = "movies"
+    }
+
     private val movieData = ArrayList<Movie>()
     fun setData(item: ArrayList<Movie>) {
         movieData.clear()
@@ -46,6 +50,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
                      .into(img_poster)
                  itemView.setOnClickListener{
                      val intent = Intent(itemView.context, DetailItem::class.java)
+                     intent.putExtra("ex_type","movies")
                      intent.putExtra(EX_ID, movies.id)
                      intent.putExtra(EX_TITLE,movies.title)
                      intent.putExtra(EX_RELEASE, movies.releaseDate)
