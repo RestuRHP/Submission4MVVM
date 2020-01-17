@@ -72,7 +72,7 @@ class MovieProvider : ContentProvider() {
         helper.open()
         val cursor : Cursor?
         when (sUriMatcher.match(uri)){
-            MOVIE -> cursor = helper.queryByType("movies")
+            MOVIE -> cursor = helper.queryByType("movie")
             else -> cursor = null
         }
         return cursor

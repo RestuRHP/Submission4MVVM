@@ -1,7 +1,6 @@
-package net.learn.submission4mvvm.ui.movies
+package net.learn.submission4mvvm.ui.base
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,10 +21,11 @@ import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RELEASE
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_TITLE
 import java.util.ArrayList
 
-class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
+class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
 
-    companion object{
-        const val type = "movies"
+    private var type : String?=null
+    fun setType(item:String){
+        type=item
     }
 
     private val movieData = ArrayList<Movie>()
@@ -50,7 +50,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
                      .into(img_poster)
                  itemView.setOnClickListener{
                      val intent = Intent(itemView.context, DetailItem::class.java)
-                     intent.putExtra("ex_type","movies")
+                     intent.putExtra("ex_type",type)
                      intent.putExtra(EX_ID, movies.id)
                      intent.putExtra(EX_TITLE,movies.title)
                      intent.putExtra(EX_RELEASE, movies.releaseDate)
@@ -79,7 +79,7 @@ class MoviesAdapter : RecyclerView.Adapter<MoviesAdapter.Holder>() {
 
     override fun getItemCount(): Int = movieData.size
 
-    override fun onBindViewHolder(holder:Holder, position: Int) {
+    override fun onBindViewHolder(holder: Holder, position: Int) {
         holder.bind(movieData[position])
     }
 }

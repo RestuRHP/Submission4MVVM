@@ -19,7 +19,7 @@ data class Movie(
     var posterPath: String?,
     @SerializedName("release_date", alternate = ["first_air_date"])
     var releaseDate: String?,
-    @SerializedName("title")
+    @SerializedName("title", alternate = ["original_name"])
     var title: String?,
     @SerializedName("vote_average")
     var voteAverage: Double?,

@@ -20,13 +20,13 @@ import net.learn.submission4mvvm.db.DBFavorite
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
 import net.learn.submission4mvvm.model.movies.Movie
-import net.learn.submission4mvvm.ui.movies.MoviesAdapter
+import net.learn.submission4mvvm.ui.base.BaseAdapter
 
 /**
  * A simple [Fragment] subclass.
  */
 class FavoriteMoviesProvider : Fragment() {
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var adapter: BaseAdapter
     private lateinit var helper: Helper
     private lateinit var listFavorite: ArrayList<Movie>
 
@@ -66,7 +66,7 @@ class FavoriteMoviesProvider : Fragment() {
 
         Log.d("List Provider","$listFavorite")
 
-        adapter = MoviesAdapter()
+        adapter = BaseAdapter()
         adapter.setData(listFavorite)
         adapter.notifyDataSetChanged()
         rv_movies.setHasFixedSize(true)

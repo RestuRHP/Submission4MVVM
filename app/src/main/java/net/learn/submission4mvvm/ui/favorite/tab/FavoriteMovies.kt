@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
+import net.learn.submission4mvvm.ui.base.BaseFavoriteAdapter
 
 class FavoriteMovies : Fragment() {
     private lateinit var adapterBase: BaseFavoriteAdapter
@@ -52,7 +53,7 @@ class FavoriteMovies : Fragment() {
         GlobalScope.launch(Dispatchers.Main) {
             progressBar.visibility = View.VISIBLE
             val deferredFavorite = async(Dispatchers.IO) {
-                val cursor = helper.queryByType("movies")
+                val cursor = helper.queryByType("movie")
                 MappingHelper.maping(cursor)
             }
             progressBar.visibility = View.INVISIBLE

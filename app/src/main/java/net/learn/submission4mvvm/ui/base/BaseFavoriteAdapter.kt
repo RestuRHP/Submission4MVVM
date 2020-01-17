@@ -1,4 +1,4 @@
-package net.learn.submission4mvvm.ui.favorite.tab
+package net.learn.submission4mvvm.ui.base
 
 import android.content.Intent
 import android.view.LayoutInflater

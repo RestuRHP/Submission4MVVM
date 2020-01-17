@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView
 
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
+import net.learn.submission4mvvm.ui.base.BaseAdapter
+import net.learn.submission4mvvm.ui.base.BaseViewModel
 import java.util.ArrayList
 
 /**
@@ -21,9 +23,9 @@ import java.util.ArrayList
  */
 class MoviesFragment : Fragment() {
 
-    private lateinit var adapter: MoviesAdapter
+    private lateinit var adapter: BaseAdapter
     private lateinit var progressBar: ProgressBar
-    private lateinit var viewModel:MoviesViewModel
+    private lateinit var viewModel: BaseViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,23 +38,24 @@ class MoviesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = MoviesAdapter()
+        adapter = BaseAdapter()
         adapter.notifyDataSetChanged()
         val movieList: RecyclerView = view.findViewById(R.id.rv_movies)
         movieList.setHasFixedSize(true)
         movieList.layoutManager = LinearLayoutManager(this.context)
         movieList.adapter=adapter
         progressBar = view.findViewById(R.id.progressBar)
-        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MoviesViewModel::class.java)
+        viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
+            BaseViewModel::class.java)
         viewModel.getMovies().observe(this, Observer { item ->
             if (item != null) {
                 adapter.setData(item as ArrayList<Movie>)
             }
             showLoading(false)
         })
-        viewModel.setMovies()
+        viewModel.setMovies("movie")
+        adapter.setType("movie")
         showLoading(true)
-
     }
 
     private fun showLoading(state: Boolean) {
