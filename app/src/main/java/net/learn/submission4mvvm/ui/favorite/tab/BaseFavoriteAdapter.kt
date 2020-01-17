@@ -12,35 +12,35 @@ import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.detail.DetailItem
 
-class FavoriteAdapterTvShows: RecyclerView.Adapter<FavoriteAdapterTvShows.Holder>() {
+class BaseFavoriteAdapter : RecyclerView.Adapter<BaseFavoriteAdapter.Holder>() {
 
     var listFavorite = ArrayList<Movie>()
-        set(listFavorite){
-            if (listFavorite.size>0){
+        set(listFavorite) {
+            if (listFavorite.size > 0) {
                 this.listFavorite.clear()
             }
             this.listFavorite.addAll(listFavorite)
             notifyDataSetChanged()
         }
 
-    inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        fun bind(movies: Movie){
-            with(itemView){
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(movies: Movie) {
+            with(itemView) {
                 tv_title.text = movies.title
                 tv_language.text = movies.originalLanguage
-                tv_rating.text = checkTextIfNull(""+movies.voteAverage)
+                tv_rating.text = checkTextIfNull("" + movies.voteAverage)
                 tv_overview.text = movies.overview
                 tv_release.text = movies.releaseDate
                 Glide.with(itemView.context)
-                    .load(BuildConfig.POSTER_PATH+movies.posterPath)
+                    .load(BuildConfig.POSTER_PATH + movies.posterPath)
                     .placeholder(R.color.colorAccent)
                     .dontAnimate()
                     .into(img_poster)
-                itemView.setOnClickListener{
+                itemView.setOnClickListener {
                     val intent = Intent(itemView.context, DetailItem::class.java)
-                    intent.putExtra(DetailItem.EX_FID,movies.fId)
-                    intent.putExtra(DetailItem.EX_ID,movies.id)
-                    intent.putExtra(DetailItem.EX_TITLE,movies.title)
+                    intent.putExtra(DetailItem.EX_FID, movies.fId)
+                    intent.putExtra(DetailItem.EX_ID, movies.id)
+                    intent.putExtra(DetailItem.EX_TITLE, movies.title)
                     intent.putExtra(DetailItem.EX_RELEASE, movies.releaseDate)
                     intent.putExtra(DetailItem.EX_RATING, movies.voteAverage)
                     intent.putExtra(DetailItem.EX_LANGUAGE, movies.originalLanguage)
@@ -50,6 +50,7 @@ class FavoriteAdapterTvShows: RecyclerView.Adapter<FavoriteAdapterTvShows.Holder
                 }
             }
         }
+
         fun checkTextIfNull(text: String?): String {
             return if (text != null && !text.isEmpty()) {
                 text
@@ -60,7 +61,7 @@ class FavoriteAdapterTvShows: RecyclerView.Adapter<FavoriteAdapterTvShows.Holder
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return Holder(view)
     }
 

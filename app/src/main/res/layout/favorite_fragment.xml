@@ -27,8 +27,7 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/view_pager_favorite"
         android:layout_width="match_parent"
-        android:layout_height="642dp"
-        android:layout_marginBottom="?attr/actionBarSize">
+        android:layout_height="match_parent">
 
     </androidx.viewpager.widget.ViewPager>
 

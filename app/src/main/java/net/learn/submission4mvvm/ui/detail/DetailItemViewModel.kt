@@ -25,9 +25,9 @@ class DetailItemViewModel : ViewModel() {
         val itemDetailCall = api.getMovieDetail(id)
         itemDetailCall.enqueue(object : Callback<Detail> {
             override fun onResponse(call: Call<Detail>, response: Response<Detail>) {
-                    val responseBody = response.body()
+                val responseBody = response.body()
                 itemDetail.value = responseBody
-                    Log.d("Detail", " Movie : $responseBody")
+                Log.d("Detail", " Movie : $responseBody")
             }
             override fun onFailure(call: Call<Detail>, t: Throwable) {
                 Log.w("Response Detail Failed", "Show message" + t.message)
@@ -35,10 +35,10 @@ class DetailItemViewModel : ViewModel() {
         })
     }
 
-    internal fun getDetailItem():MutableLiveData<Detail>{
-        return itemDetail
-    }
-//    val getDetailItem: LiveData<Detail>
-//    get()=itemDetail
+//    internal fun getDetailItem():MutableLiveData<Detail>{
+//        return itemDetail
+//    }
+    val getDetailItem: LiveData<Detail>
+    get()=itemDetail
 
 }

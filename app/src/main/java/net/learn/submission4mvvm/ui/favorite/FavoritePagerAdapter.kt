@@ -1,15 +1,12 @@
 package net.learn.submission4mvvm.ui.favorite
 
-import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import net.learn.submission4mvvm.R
-import net.learn.submission4mvvm.ui.movies.MoviesFragment
-import net.learn.submission4mvvm.ui.tvshows.TvShowsFragment
-import java.util.ArrayList
+import java.util.*
 
-class FavoritePagerAdapter internal constructor(fm: FragmentManager):FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
+class FavoritePagerAdapter internal constructor(fm: FragmentManager) :
+    FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
     private val mFragmentList = ArrayList<Fragment>()
     private val mFragmentTitleList = ArrayList<String>()
 

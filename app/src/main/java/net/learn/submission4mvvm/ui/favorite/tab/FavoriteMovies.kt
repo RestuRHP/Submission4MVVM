@@ -10,33 +10,37 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_detai_item.progressBar
-import kotlinx.android.synthetic.main.favorite_display.*
-import kotlinx.android.synthetic.main.fragment_display.*
 import kotlinx.android.synthetic.main.fragment_display.rv_movies
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
 
-class FavoriteMovies: Fragment() {
-    private lateinit var adapterMovies: FavoriteAdapterMovies
+class FavoriteMovies : Fragment() {
+    private lateinit var adapterBase: BaseFavoriteAdapter
     private lateinit var helper: Helper
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.favorite_display, container, false)
+        val view = inflater.inflate(R.layout.favorite_display, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterMovies =
-            FavoriteAdapterMovies()
-        adapterMovies.notifyDataSetChanged()
+        adapterBase = BaseFavoriteAdapter()
+        adapterBase.notifyDataSetChanged()
         val movieList: RecyclerView = view.findViewById(R.id.rv_movies)
         movieList.setHasFixedSize(true)
         movieList.layoutManager = LinearLayoutManager(this.context)
-        movieList.adapter=adapterMovies
+        movieList.adapter = adapterBase
 
         loadFavorite()
 
@@ -44,23 +48,22 @@ class FavoriteMovies: Fragment() {
         helper.open()
     }
 
-    private fun loadFavorite(){
-        GlobalScope.launch (Dispatchers.Main){
+    private fun loadFavorite() {
+        GlobalScope.launch(Dispatchers.Main) {
             progressBar.visibility = View.VISIBLE
-            val deferredFavorite = async(Dispatchers.IO){
+            val deferredFavorite = async(Dispatchers.IO) {
                 val cursor = helper.queryByType("movies")
                 MappingHelper.maping(cursor)
             }
             progressBar.visibility = View.INVISIBLE
             val favorite = deferredFavorite.await()
-            Log.d("GET DATA  Movies: ","$favorite")
-            if (favorite.size>0){
-                adapterMovies.listFavorite =favorite
+            Log.d("GET DATA  Movies: ", "$favorite")
+            if (favorite.size > 0) {
+                adapterBase.listFavorite = favorite
+            } else {
+                adapterBase.listFavorite = ArrayList()
+                showSnackbarMessage("Tidak ada data saat ini")
             }
-//            else{
-//                adapter.listFavorite = ArrayList()
-//                showSnackbarMessage("Tidak ada data saat ini")
-//            }
         }
     }
 
@@ -76,7 +79,7 @@ class FavoriteMovies: Fragment() {
     override fun onResume() {
         super.onResume()
         helper.open()
-        adapterMovies.listFavorite.clear()
+        adapterBase.listFavorite.clear()
         loadFavorite()
         rv_movies.adapter?.notifyDataSetChanged()
     }

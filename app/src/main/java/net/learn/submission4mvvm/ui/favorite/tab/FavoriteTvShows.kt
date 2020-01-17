@@ -19,25 +19,28 @@ import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
 
-class FavoriteTvShows: Fragment() {
-    private lateinit var adapterTvShows: FavoriteAdapterTvShows
+class FavoriteTvShows : Fragment() {
+    private lateinit var adapterBase: BaseFavoriteAdapter
     private lateinit var helper: Helper
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
-        val view =inflater.inflate(R.layout.favorite_display, container, false)
-
+        val view = inflater.inflate(R.layout.favorite_display, container, false)
         return view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapterTvShows = FavoriteAdapterTvShows()
-        adapterTvShows.notifyDataSetChanged()
+        adapterBase = BaseFavoriteAdapter()
+        adapterBase.notifyDataSetChanged()
         val movieList: RecyclerView = view.findViewById(R.id.rv_movies)
         movieList.setHasFixedSize(true)
         movieList.layoutManager = LinearLayoutManager(this.context)
-        movieList.adapter=adapterTvShows
+        movieList.adapter = adapterBase
 
         loadFavorite()
 
@@ -45,23 +48,22 @@ class FavoriteTvShows: Fragment() {
         helper.open()
     }
 
-    private fun loadFavorite(){
-        GlobalScope.launch (Dispatchers.Main){
+    private fun loadFavorite() {
+        GlobalScope.launch(Dispatchers.Main) {
             progressBar.visibility = View.VISIBLE
-            val deferredFavorite = async(Dispatchers.IO){
+            val deferredFavorite = async(Dispatchers.IO) {
                 val cursor = helper.queryByType("tvshows")
                 MappingHelper.maping(cursor)
             }
             progressBar.visibility = View.INVISIBLE
             val favorite = deferredFavorite.await()
-            Log.d("GET Data TvShows: ","$favorite")
-            if (favorite.size>0){
-                adapterTvShows.listFavorite =favorite
+            Log.d("GET Data TvShows: ", "$favorite")
+            if (favorite.size > 0) {
+                adapterBase.listFavorite = favorite
+            } else {
+                adapterBase.listFavorite = ArrayList()
+                showSnackbarMessage("Tidak ada data saat ini")
             }
-//            else{
-//                adapter.listFavorite = ArrayList()
-//                showSnackbarMessage("Tidak ada data saat ini")
-//            }
         }
     }
 
@@ -77,7 +79,7 @@ class FavoriteTvShows: Fragment() {
     override fun onResume() {
         super.onResume()
         helper.open()
-        adapterTvShows.listFavorite.clear()
+        adapterBase.listFavorite.clear()
         loadFavorite()
         rv_movies.adapter?.notifyDataSetChanged()
     }
