@@ -20,7 +20,7 @@ import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RATING
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RELEASE
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_TITLE
 
-class FavoriteAdapterMovies():RecyclerView.Adapter<FavoriteAdapterMovies.Holder>() {
+class FavoriteAdapterMovies :RecyclerView.Adapter<FavoriteAdapterMovies.Holder>() {
 
     var listFavorite = ArrayList<Movie>()
     set(listFavorite){

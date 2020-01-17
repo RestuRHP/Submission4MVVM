@@ -26,7 +26,7 @@ class DetailItemViewModel : ViewModel() {
         itemDetailCall.enqueue(object : Callback<Detail> {
             override fun onResponse(call: Call<Detail>, response: Response<Detail>) {
                     val responseBody = response.body()
-                    itemDetail.setValue(responseBody)
+                itemDetail.value = responseBody
                     Log.d("Detail", " Movie : $responseBody")
             }
             override fun onFailure(call: Call<Detail>, t: Throwable) {

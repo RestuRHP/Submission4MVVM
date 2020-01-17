@@ -26,7 +26,7 @@ class MoviesViewModel:ViewModel(){
             override fun onResponse(call: Call<MovieObject>, response: Response<MovieObject>) {
                 if(response.isSuccessful){
                     val responseBody = response.body()
-                    listMovies.setValue(responseBody?.results)
+                    listMovies.value = responseBody?.results
                     Log.d("Repository", " List Movie : ${response.body()?.results}")
                 }
             }

@@ -29,7 +29,7 @@ class TvShowsViewModel : ViewModel() {
             override fun onResponse(call: Call<TvShowsObject>, response: Response<TvShowsObject>) {
                 if(response.isSuccessful){
                     val responseBody = response.body()
-                    listTv.setValue(responseBody?.results)
+                    listTv.value = responseBody?.results
                     Log.d("Repository", " List Movie : ${responseBody?.results}")
                 }
             }

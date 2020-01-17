@@ -9,7 +9,7 @@ internal class DatabaseHelper(context: Context):
     SQLiteOpenHelper(context, DATABASE_NAME,null,DATABASE_VERSION) {
 
     companion object{
-        private const val DATABASE_NAME = "dbfavorite"
+        private const val DATABASE_NAME = "db_favorite"
         private const val DATABASE_VERSION = 1
         private const val SQL_CREATE_TABLE = "CREATE TABLE ${DBFavorite.Columns.TABLE_NAME}"+
                 "(${DBFavorite.Columns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,"+
@@ -26,7 +26,7 @@ internal class DatabaseHelper(context: Context):
 
     override fun onCreate(db: SQLiteDatabase?) {
         db!!.execSQL(SQL_CREATE_TABLE)
-        Log.d("Create Table SQLIte","$SQL_CREATE_TABLE")
+        Log.d("Create Table SQLIte", SQL_CREATE_TABLE)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
