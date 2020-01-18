@@ -12,16 +12,16 @@ internal class DatabaseHelper(context: Context):
         private const val DATABASE_NAME = "db_favorite"
         private const val DATABASE_VERSION = 1
         private const val SQL_CREATE_TABLE = "CREATE TABLE ${DBFavorite.Columns.TABLE_NAME}"+
-                "(${DBFavorite.Columns._ID} INTEGER PRIMARY KEY AUTOINCREMENT,"+
-                "${DBFavorite.Columns.fTYPE} TEXT ,"+
-                "${DBFavorite.Columns.ID} INTEGER,"+
-                "${DBFavorite.Columns.TITLE} TEXT ,"+
-                "${DBFavorite.Columns.BACKDROP} TEXT,"+
-                "${DBFavorite.Columns.ORIGINAL_LANG} TEXT,"+
-                "${DBFavorite.Columns.POSTER} TEXT,"+
-                "${DBFavorite.Columns.OVERVIEW} TEXT,"+
-                "${DBFavorite.Columns.RELEASE_DATE} TEXT,"+
-                "${DBFavorite.Columns.RATING} FLOAT)"
+                "(${DBFavorite.Columns._ID} INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"+
+                "${DBFavorite.Columns.fTYPE} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.ID} INTEGER NOT NULL,"+
+                "${DBFavorite.Columns.TITLE} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.BACKDROP} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.ORIGINAL_LANG} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.POSTER} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.OVERVIEW} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.RELEASE_DATE} TEXT NOT NULL,"+
+                "${DBFavorite.Columns.RATING} FLOAT NOT NULL)"
     }
 
     override fun onCreate(db: SQLiteDatabase?) {

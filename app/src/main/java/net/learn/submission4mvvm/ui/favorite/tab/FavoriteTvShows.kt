@@ -43,10 +43,10 @@ class FavoriteTvShows : Fragment() {
         movieList.layoutManager = LinearLayoutManager(this.context)
         movieList.adapter = adapterBase
 
-        loadFavorite()
-
         helper = Helper(context!!)
         helper.open()
+
+        loadFavorite()
     }
 
     private fun loadFavorite() {

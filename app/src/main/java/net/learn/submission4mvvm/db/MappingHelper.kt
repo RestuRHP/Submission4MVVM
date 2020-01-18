@@ -6,7 +6,7 @@ import net.learn.submission4mvvm.model.movies.Movie
 object MappingHelper {
     fun maping(favCursor: Cursor):ArrayList<Movie>{
         val favList = ArrayList<Movie>()
-        favCursor.moveToFirst()
+//        favCursor.moveToFirst()
         while (favCursor.moveToNext()){
             val fId = favCursor.getInt(favCursor.getColumnIndexOrThrow(DBFavorite.Columns._ID))
             val backdrop = favCursor.getString(favCursor.getColumnIndexOrThrow(DBFavorite.Columns.BACKDROP))

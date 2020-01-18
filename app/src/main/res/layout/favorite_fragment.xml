@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             app:layout_collapseMode="pin"
             android:background="@color/colorPrimary"
+            app:tabTextColor="@android:color/white"
             app:tabMode="fixed"
             app:tabMaxWidth="0dp"
             app:tabGravity="fill"

@@ -64,27 +64,22 @@ class DetailItem : AppCompatActivity() {
 
         showLoading(true)
 
-
         val extras =intent.extras
         if (extras != null){
             showDetail(extras)
         }else{
             finish()
         }
-        check()
-
-
-    }
+            }
 
     private fun check(){
         helper.open()
-        val cursor=helper.queryAll()
+        val cursor=helper.queryById(id.toString())
         val inDB : ArrayList<Movie> = MappingHelper.maping(cursor)
-        Log.d("Check Data SQL","$inDB")
-        Log.d("Check Data SQL","$fId")
+        Log.d("Check ID","$id")
+        Log.d("Check Data in DB","$inDB")
         for (movie in inDB) {
             if (id == movie.id) {
-                fId = movie.fId!!
                 isFavorite = true
             }
             if (isFavorite) {
@@ -118,9 +113,9 @@ class DetailItem : AppCompatActivity() {
     }
 
     private fun removeFavorite() {
-        val fId = fId.toString()
+        val Id = id.toString()
         helper.open()
-        helper.deleteById(fId)
+        helper.deleteById(Id)
 
         snackBar("$title Telah DiHapus Dari Favorite")
 
@@ -160,6 +155,7 @@ class DetailItem : AppCompatActivity() {
         fId = extras.getInt(EX_FID,0)
         fType = extras.getString(EX_TYPE, "")
         id = extras.getInt(EX_ID,0)
+        Log.d("get Intent ID :","$id")
         title = extras.getString(EX_TITLE,"")
         backdrop = extras.getString(EX_BACKDROP,"")
         language = extras.getString(EX_LANGUAGE,"")
@@ -180,6 +176,8 @@ class DetailItem : AppCompatActivity() {
             .into(img_poster)
         showLoading(false)
         Log.d("Get Type Fragment", fType)
+
+        check()
     }
 
     private fun showLoading(state: Boolean) {
