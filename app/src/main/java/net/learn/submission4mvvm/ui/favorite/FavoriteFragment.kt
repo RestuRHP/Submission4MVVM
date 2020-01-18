@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import kotlinx.android.synthetic.main.favorite_fragment.*
 import net.learn.submission4mvvm.R
-import net.learn.submission4mvvm.ui.favorite.tab.FavoriteMovies
 import net.learn.submission4mvvm.ui.favorite.tab.FavoriteMoviesProvider
 import net.learn.submission4mvvm.ui.favorite.tab.FavoriteTvShows
 

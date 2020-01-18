@@ -9,10 +9,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.favorite_display.*
 import net.learn.submission4mvvm.R
@@ -49,29 +49,35 @@ class FavoriteMoviesProvider : Fragment() {
     }
 
     @SuppressLint("Recycle")
-    private fun loadFavorite(){
+    private fun loadFavorite() {
         Thread = HandlerThread("DataObserver")
         Thread?.start()
         val handler = Handler(Thread?.looper)
-        mObserver = DataObserver(handler,context as Context)
-        context?.contentResolver?.registerContentObserver(DBFavorite.Columns().CONTENT_URI,true,mObserver as ContentObserver)
+        mObserver = DataObserver(handler, context as Context)
+        context?.contentResolver?.registerContentObserver(
+            DBFavorite.Columns().CONTENT_URI,
+            true,
+            mObserver as ContentObserver
+        )
 
-        val list = context?.contentResolver?.query(DBFavorite.Columns().CONTENT_URI,
+        val list = context?.contentResolver?.query(
+            DBFavorite.Columns().CONTENT_URI,
             null,
             null,
             null,
-            null)
+            null
+        )
 
         listFavorite = MappingHelper.maping(list as Cursor)
 
-        Log.d("List Provider","$listFavorite")
+        Log.d("List Provider", "$listFavorite")
 
         adapter = BaseAdapter()
         adapter.setData(listFavorite)
         adapter.notifyDataSetChanged()
         rv_movies.setHasFixedSize(true)
         rv_movies.layoutManager = LinearLayoutManager(this.context)
-        rv_movies.adapter=adapter
+        rv_movies.adapter = adapter
 
         progressBar.visibility = View.GONE
     }

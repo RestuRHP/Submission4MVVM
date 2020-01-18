@@ -12,21 +12,21 @@ import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.POSTER
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.RATING
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.RELEASE_DATE
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.TITLE
-import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.fTYPE
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion._ID
+import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.fTYPE
 import net.learn.submission4mvvm.model.movies.Movie
 import java.sql.SQLException
 
 class Helper(context: Context) {
 
-    companion object{
+    companion object {
         private const val DATABASE_TABLE = DBFavorite.Columns.TABLE_NAME
-        private lateinit var dataHelper:DatabaseHelper
+        private lateinit var dataHelper: DatabaseHelper
         private lateinit var dataBase: SQLiteDatabase
     }
 
     init {
-        dataHelper= DatabaseHelper(context)
+        dataHelper = DatabaseHelper(context)
     }
 
 
@@ -55,8 +55,8 @@ class Helper(context: Context) {
         )
         cursor.moveToFirst()
         var movie: Movie
-        if (cursor.count>0){
-            do{
+        if (cursor.count > 0) {
+            do {
                 movie = Movie(
                     cursor.getInt(cursor.getColumnIndexOrThrow(_ID)),
                     cursor.getString(cursor.getColumnIndexOrThrow(BACKDROP)),
@@ -71,7 +71,7 @@ class Helper(context: Context) {
                 )
                 arrayList.add(movie)
                 cursor.moveToNext()
-            }while (!cursor.isAfterLast)
+            } while (!cursor.isAfterLast)
         }
         cursor.close()
         return arrayList
@@ -86,7 +86,8 @@ class Helper(context: Context) {
             null,
             null,
             "$_ID ASC",
-            null)
+            null
+        )
     }
 
     fun queryById(id: String): Cursor {
@@ -98,10 +99,11 @@ class Helper(context: Context) {
             null,
             null,
             null,
-            null)
+            null
+        )
     }
 
-    fun queryByType(type:String):Cursor{
+    fun queryByType(type: String): Cursor {
         return dataBase.query(
             DATABASE_TABLE,
             null,
@@ -110,7 +112,8 @@ class Helper(context: Context) {
             null,
             null,
             null,
-            null)
+            null
+        )
     }
 
     fun insert(values: ContentValues?): Long {
@@ -140,8 +143,10 @@ class Helper(context: Context) {
     }
 
     fun queryByIdProvider(id: String): Cursor {
-        return dataBase.query(DATABASE_TABLE, null, "$ID = ?", arrayOf(id), null,
-            null, null, null)
+        return dataBase.query(
+            DATABASE_TABLE, null, "$ID = ?", arrayOf(id), null,
+            null, null, null
+        )
     }
 
     fun queryProvider(): Cursor {
@@ -152,7 +157,8 @@ class Helper(context: Context) {
             null,
             null,
             null,
-            "$_ID ASC")
+            "$_ID ASC"
+        )
     }
 
     fun insertProvider(values: ContentValues): Long {

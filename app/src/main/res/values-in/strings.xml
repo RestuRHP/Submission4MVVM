@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name = "app_name"> Submission 4 MVVM </string>
-    <string name = "title_film"> Judul Film </string>
-    <string name = "time"> lepaskan </string>
-    <string name = "overview"> Ikhtisar </string>
-    <string name = "image_rating"> Peringkat Gambar </string>
-    <string name = "rating"> Peringkat </string>
-    <string name = "image_lang"> Bahasa Gambar </string>
-    <string name = "language"> Bahasa </string>
-    <string name = "image_poster"> Poster Gambar </string>
-    <string name = "movies"> Film </string>
-    <string name = "tvShows"> Acara TV </string>
-    <string name = "favorite"> Favorit </string>
+    <string name="app_name"> Submission 4 MVVM </string>
+    <string name="title_film"> Judul Film </string>
+    <string name="time"> lepaskan </string>
+    <string name="overview"> Ikhtisar </string>
+    <string name="image_rating"> Peringkat Gambar </string>
+    <string name="rating"> Peringkat </string>
+    <string name="image_lang"> Bahasa Gambar </string>
+    <string name="language"> Bahasa </string>
+    <string name="image_poster"> Poster Gambar </string>
+    <string name="movies"> Film </string>
+    <string name="tvShows"> Acara TV </string>
+    <string name="favorite"> Favorit </string>
     <string name="icon_star">icon star</string>
     <string name="image_white">image white</string>
     <string name="lorem">-</string>

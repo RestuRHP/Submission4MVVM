@@ -16,12 +16,12 @@ import net.learn.submission4mvvm.ui.favorite.tab.FavoriteMoviesProvider
 class MovieProvider : ContentProvider() {
 
     private val MOVIE = 1
-    private val MOVIEID =2
-    private val MOVIE_TYPE =3
+    private val MOVIEID = 2
+    private val MOVIE_TYPE = 3
     private val sUriMatcher = UriMatcher(UriMatcher.NO_MATCH)
-    lateinit var helper : Helper
+    lateinit var helper: Helper
 
-    private fun UriMatching(){
+    private fun UriMatching() {
         sUriMatcher.addURI(DBFavorite().AUTHORITY, TABLE_NAME, MOVIE)
         sUriMatcher.addURI(DBFavorite().AUTHORITY, "$TABLE_NAME/$fTYPE", MOVIE_TYPE)
         sUriMatcher.addURI(DBFavorite().AUTHORITY, "$TABLE_NAME/$_ID", MOVIEID)
@@ -31,13 +31,15 @@ class MovieProvider : ContentProvider() {
     override fun delete(uri: Uri, selection: String?, selectionArgs: Array<String>?): Int {
         helper.open()
         val del: Int
-        when (sUriMatcher.match(uri)){
+        when (sUriMatcher.match(uri)) {
             MOVIEID -> del = helper.deleteProvider(uri.lastPathSegment as String)
             else -> del = 0
         }
-        context!!.contentResolver.notifyChange(DBFavorite.Columns().CONTENT_URI,FavoriteMoviesProvider.DataObserver(
-            Handler(), context!!
-        ))
+        context!!.contentResolver.notifyChange(
+            DBFavorite.Columns().CONTENT_URI, FavoriteMoviesProvider.DataObserver(
+                Handler(), context!!
+            )
+        )
         return del
     }
 
@@ -48,14 +50,16 @@ class MovieProvider : ContentProvider() {
     override fun insert(uri: Uri, values: ContentValues?): Uri? {
         helper.open()
         val added: Long
-        when (sUriMatcher.match(uri)){
+        when (sUriMatcher.match(uri)) {
             MOVIE -> added = helper.insertProvider(values as ContentValues)
             else -> added = 0
         }
-        context?.contentResolver?.notifyChange(DBFavorite.Columns().CONTENT_URI,
-            FavoriteMoviesProvider.DataObserver(Handler(),context!!))
+        context?.contentResolver?.notifyChange(
+            DBFavorite.Columns().CONTENT_URI,
+            FavoriteMoviesProvider.DataObserver(Handler(), context!!)
+        )
 
-        return Uri.parse(DBFavorite.Columns().CONTENT_URI.toString()+"/"+added)
+        return Uri.parse(DBFavorite.Columns().CONTENT_URI.toString() + "/" + added)
     }
 
     override fun onCreate(): Boolean {
@@ -70,8 +74,8 @@ class MovieProvider : ContentProvider() {
         selectionArgs: Array<String>?, sortOrder: String?
     ): Cursor? {
         helper.open()
-        val cursor : Cursor?
-        when (sUriMatcher.match(uri)){
+        val cursor: Cursor?
+        when (sUriMatcher.match(uri)) {
             MOVIE -> cursor = helper.queryByType("movie")
             else -> cursor = null
         }
@@ -85,11 +89,14 @@ class MovieProvider : ContentProvider() {
         helper.open()
         val updated: Int
         when (sUriMatcher.match(uri)) {
-            MOVIEID -> updated = helper.updateProvider(uri.lastPathSegment as String, values as ContentValues)
+            MOVIEID -> updated =
+                helper.updateProvider(uri.lastPathSegment as String, values as ContentValues)
             else -> updated = 0
         }
-        context!!.contentResolver.notifyChange(DBFavorite.Columns().CONTENT_URI,
-            FavoriteMoviesProvider.DataObserver(Handler(), context!!))
+        context!!.contentResolver.notifyChange(
+            DBFavorite.Columns().CONTENT_URI,
+            FavoriteMoviesProvider.DataObserver(Handler(), context!!)
+        )
         return updated
     }
 }

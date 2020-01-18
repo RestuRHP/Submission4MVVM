@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardViewItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/cardViewItem"
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp"
     android:layout_marginEnd="8dp"
@@ -16,18 +16,18 @@
 
         <androidx.cardview.widget.CardView
             android:id="@+id/cvPoster"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_width="95dp"
-            app:cardCornerRadius="9dp"
-            android:layout_height="140dp">
+            android:layout_height="140dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            app:cardCornerRadius="9dp">
 
             <ImageView
                 android:id="@+id/img_poster"
                 android:layout_width="95dp"
                 android:layout_height="140dp"
-                android:contentDescription="@string/image_poster"/>
+                android:contentDescription="@string/image_poster" />
 
         </androidx.cardview.widget.CardView>
 
@@ -35,13 +35,13 @@
             android:id="@+id/tv_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
-            android:textStyle="bold"
-            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/cvPoster"
-            android:text="@string/title_film">
+            android:text="@string/title_film"
+            android:textSize="18sp"
+            android:textStyle="bold">
 
         </TextView>
 
@@ -49,12 +49,12 @@
             android:id="@+id/tv_release"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
             android:layout_below="@+id/tv_title"
             android:layout_marginStart="16dp"
-            android:textSize="12sp"
+            android:layout_marginEnd="8dp"
             android:layout_toEndOf="@+id/cvPoster"
-            android:text="@string/time">
+            android:text="@string/time"
+            android:textSize="12sp">
 
         </TextView>
 
@@ -62,16 +62,16 @@
             android:id="@+id/tv_overview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
             android:layout_above="@+id/layout_RT"
             android:layout_below="@id/tv_release"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:layout_toEndOf="@id/cvPoster"
-            android:textSize="12sp"
             android:maxLines="3"
-            android:text="@string/overview">
+            android:text="@string/overview"
+            android:textSize="12sp">
 
         </TextView>
 

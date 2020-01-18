@@ -2,21 +2,20 @@ package net.learn.submission4mvvm.ui.movies
 
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.base.BaseAdapter
 import net.learn.submission4mvvm.ui.base.BaseViewModel
-import java.util.ArrayList
+import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -31,7 +30,7 @@ class MoviesFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view =inflater.inflate(R.layout.fragment_display, container, false)
+        val view = inflater.inflate(R.layout.fragment_display, container, false)
 
         return view
     }
@@ -43,10 +42,11 @@ class MoviesFragment : Fragment() {
         val movieList: RecyclerView = view.findViewById(R.id.rv_movies)
         movieList.setHasFixedSize(true)
         movieList.layoutManager = LinearLayoutManager(this.context)
-        movieList.adapter=adapter
+        movieList.adapter = adapter
         progressBar = view.findViewById(R.id.progressBar)
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
-            BaseViewModel::class.java)
+            BaseViewModel::class.java
+        )
         viewModel.getMovies().observe(this, Observer { item ->
             if (item != null) {
                 adapter.setData(item as ArrayList<Movie>)

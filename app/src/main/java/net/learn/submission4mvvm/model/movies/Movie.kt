@@ -24,4 +24,4 @@ data class Movie(
     @SerializedName("vote_average")
     var voteAverage: Double?,
     var fType: String?
-): Parcelable
+) : Parcelable

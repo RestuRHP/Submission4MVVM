@@ -9,8 +9,8 @@ class DBFavorite {
     val AUTHORITY = "net.learn.submission4mvvm"
     private val SCHEME = "content"
 
-     internal class Columns : BaseColumns {
-        companion object{
+    internal class Columns : BaseColumns {
+        companion object {
             const val TABLE_NAME = "tb_favorite"
             const val _ID = "fId"
             const val ID = "id"
@@ -23,10 +23,11 @@ class DBFavorite {
             const val RATING = "voteAverage"
             const val fTYPE = "fType"
         }
-         val CONTENT_URI: Uri = Uri.Builder().scheme(DBFavorite().SCHEME)
-             .authority(DBFavorite().AUTHORITY)
-             .appendPath(TABLE_NAME)
-             .build()
+
+        val CONTENT_URI: Uri = Uri.Builder().scheme(DBFavorite().SCHEME)
+            .authority(DBFavorite().AUTHORITY)
+            .appendPath(TABLE_NAME)
+            .build()
     }
 
 }

@@ -19,13 +19,13 @@ import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_POSTER
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RATING
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RELEASE
 import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_TITLE
-import java.util.ArrayList
+import java.util.*
 
 class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
 
-    private var type : String?=null
-    fun setType(item:String){
-        type=item
+    private var type: String? = null
+    fun setType(item: String) {
+        type = item
     }
 
     private val movieData = ArrayList<Movie>()
@@ -35,45 +35,46 @@ class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
         notifyDataSetChanged()
     }
 
-     inner class Holder(itemView:View):RecyclerView.ViewHolder(itemView) {
-         fun bind(movies: Movie){
-             with(itemView){
-                 tv_title.text = movies.title
-                 tv_language.text = movies.originalLanguage
-                 tv_rating.text = checkTextIfNull(""+movies.voteAverage)
-                 tv_overview.text = movies.overview
-                 tv_release.text = movies.releaseDate
-                 Glide.with(itemView.context)
-                     .load(BuildConfig.POSTER_PATH+movies.posterPath)
-                     .placeholder(R.color.colorAccent)
-                     .dontAnimate()
-                     .into(img_poster)
-                 itemView.setOnClickListener{
-                     val intent = Intent(itemView.context, DetailItem::class.java)
-                     intent.putExtra("ex_type",type)
-                     intent.putExtra(EX_ID, movies.id)
-                     intent.putExtra(EX_TITLE,movies.title)
-                     intent.putExtra(EX_RELEASE, movies.releaseDate)
-                     intent.putExtra(EX_RATING, movies.voteAverage)
-                     intent.putExtra(EX_LANGUAGE, movies.originalLanguage)
-                     intent.putExtra(EX_OVERVIEW, movies.overview)
-                     intent.putExtra(EX_BACKDROP, movies.backdropPath)
-                     intent.putExtra(EX_POSTER, movies.posterPath)
-                     itemView.context.startActivity(intent)
-                 }
-             }
-         }
-         fun checkTextIfNull(text: String?): String {
-             return if (text != null && !text.isEmpty()) {
-                 text
-             } else {
-                 "-"
-             }
-         }
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        fun bind(movies: Movie) {
+            with(itemView) {
+                tv_title.text = movies.title
+                tv_language.text = movies.originalLanguage
+                tv_rating.text = checkTextIfNull("" + movies.voteAverage)
+                tv_overview.text = movies.overview
+                tv_release.text = movies.releaseDate
+                Glide.with(itemView.context)
+                    .load(BuildConfig.POSTER_PATH + movies.posterPath)
+                    .placeholder(R.color.colorAccent)
+                    .dontAnimate()
+                    .into(img_poster)
+                itemView.setOnClickListener {
+                    val intent = Intent(itemView.context, DetailItem::class.java)
+                    intent.putExtra("ex_type", type)
+                    intent.putExtra(EX_ID, movies.id)
+                    intent.putExtra(EX_TITLE, movies.title)
+                    intent.putExtra(EX_RELEASE, movies.releaseDate)
+                    intent.putExtra(EX_RATING, movies.voteAverage)
+                    intent.putExtra(EX_LANGUAGE, movies.originalLanguage)
+                    intent.putExtra(EX_OVERVIEW, movies.overview)
+                    intent.putExtra(EX_BACKDROP, movies.backdropPath)
+                    intent.putExtra(EX_POSTER, movies.posterPath)
+                    itemView.context.startActivity(intent)
+                }
+            }
+        }
+
+        fun checkTextIfNull(text: String?): String {
+            return if (text != null && !text.isEmpty()) {
+                text
+            } else {
+                "-"
+            }
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie,parent,false)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_movie, parent, false)
         return Holder(view)
     }
 

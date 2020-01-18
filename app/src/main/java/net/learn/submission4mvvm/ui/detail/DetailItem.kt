@@ -10,12 +10,7 @@ import android.widget.ProgressBar
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_detai_item.img_poster
-import kotlinx.android.synthetic.main.activity_detai_item.tv_language
-import kotlinx.android.synthetic.main.activity_detai_item.tv_overview
-import kotlinx.android.synthetic.main.activity_detai_item.tv_rating
-import kotlinx.android.synthetic.main.activity_detai_item.tv_release
-import kotlinx.android.synthetic.main.activity_detai_item.tv_title
+import kotlinx.android.synthetic.main.activity_detai_item.*
 import net.learn.submission4mvvm.BuildConfig
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.db.DBFavorite
@@ -26,7 +21,7 @@ import net.learn.submission4mvvm.model.movies.Movie
 class DetailItem : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
-    private lateinit var helper:Helper
+    private lateinit var helper: Helper
 
     private var fId = 0
     private var fType = ""
@@ -39,7 +34,7 @@ class DetailItem : AppCompatActivity() {
     private var release = ""
     private var rating = 0.0
 
-    var menuItem:Menu?=null
+    var menuItem: Menu? = null
     var isFavorite = false
 
     companion object {
@@ -54,30 +49,31 @@ class DetailItem : AppCompatActivity() {
         const val EX_BACKDROP = "ex_backdrop"
         const val EX_POSTER = "ex_poster"
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detai_item)
 
         progressBar = findViewById(R.id.progressBar)
 
-        helper=Helper(this)
+        helper = Helper(this)
 
         showLoading(true)
 
-        val extras =intent.extras
-        if (extras != null){
+        val extras = intent.extras
+        if (extras != null) {
             showDetail(extras)
-        }else{
+        } else {
             finish()
         }
-            }
+    }
 
-    private fun check(){
+    private fun check() {
         helper.open()
-        val cursor=helper.queryById(id.toString())
-        val inDB : ArrayList<Movie> = MappingHelper.maping(cursor)
-        Log.d("Check ID","$id")
-        Log.d("Check Data in DB","$inDB")
+        val cursor = helper.queryById(id.toString())
+        val inDB: ArrayList<Movie> = MappingHelper.maping(cursor)
+        Log.d("Check ID", "$id")
+        Log.d("Check Data in DB", "$inDB")
         for (movie in inDB) {
             if (id == movie.id) {
                 isFavorite = true
@@ -123,16 +119,16 @@ class DetailItem : AppCompatActivity() {
     }
 
     private fun addToFavorite() {
-        val values= ContentValues()
-        values.put(DBFavorite.Columns.fTYPE,fType)
-        values.put(DBFavorite.Columns.ID,id)
-        values.put(DBFavorite.Columns.TITLE,title)
-        values.put(DBFavorite.Columns.BACKDROP,backdrop)
-        values.put(DBFavorite.Columns.ORIGINAL_LANG,language)
-        values.put(DBFavorite.Columns.POSTER,poster)
-        values.put(DBFavorite.Columns.OVERVIEW,overview)
-        values.put(DBFavorite.Columns.RELEASE_DATE,release)
-        values.put(DBFavorite.Columns.RATING,rating)
+        val values = ContentValues()
+        values.put(DBFavorite.Columns.fTYPE, fType)
+        values.put(DBFavorite.Columns.ID, id)
+        values.put(DBFavorite.Columns.TITLE, title)
+        values.put(DBFavorite.Columns.BACKDROP, backdrop)
+        values.put(DBFavorite.Columns.ORIGINAL_LANG, language)
+        values.put(DBFavorite.Columns.POSTER, poster)
+        values.put(DBFavorite.Columns.OVERVIEW, overview)
+        values.put(DBFavorite.Columns.RELEASE_DATE, release)
+        values.put(DBFavorite.Columns.RATING, rating)
 
         helper.open()
         helper.insert(values)
@@ -140,7 +136,7 @@ class DetailItem : AppCompatActivity() {
 
         snackBar("$title Telah Ditambahkan Ke Favorite")
 
-        Log.d("Save Favorite : ","Success! $values")
+        Log.d("Save Favorite : ", "Success! $values")
     }
 
     private fun setFavorite() {
@@ -152,23 +148,23 @@ class DetailItem : AppCompatActivity() {
     }
 
     private fun showDetail(extras: Bundle) {
-        fId = extras.getInt(EX_FID,0)
+        fId = extras.getInt(EX_FID, 0)
         fType = extras.getString(EX_TYPE, "")
-        id = extras.getInt(EX_ID,0)
-        Log.d("get Intent ID :","$id")
-        title = extras.getString(EX_TITLE,"")
-        backdrop = extras.getString(EX_BACKDROP,"")
-        language = extras.getString(EX_LANGUAGE,"")
-        poster = extras.getString(EX_POSTER,"")
-        overview = extras.getString(EX_OVERVIEW,"")
-        release = extras.getString(EX_RELEASE,"")
+        id = extras.getInt(EX_ID, 0)
+        Log.d("get Intent ID :", "$id")
+        title = extras.getString(EX_TITLE, "")
+        backdrop = extras.getString(EX_BACKDROP, "")
+        language = extras.getString(EX_LANGUAGE, "")
+        poster = extras.getString(EX_POSTER, "")
+        overview = extras.getString(EX_OVERVIEW, "")
+        release = extras.getString(EX_RELEASE, "")
         rating = extras.getDouble(EX_RATING, 0.0)
 
-        tv_title.text = extras.getString(EX_TITLE,"")
-        tv_release.text = extras.getString(EX_RELEASE,"")
-        tv_rating.text = extras.getDouble(EX_RATING,0.0).toString()
-        tv_language.text = extras.getString(EX_LANGUAGE,"")
-        tv_overview.text = extras.getString(EX_OVERVIEW,"")
+        tv_title.text = extras.getString(EX_TITLE, "")
+        tv_release.text = extras.getString(EX_RELEASE, "")
+        tv_rating.text = extras.getDouble(EX_RATING, 0.0).toString()
+        tv_language.text = extras.getString(EX_LANGUAGE, "")
+        tv_overview.text = extras.getString(EX_OVERVIEW, "")
         Glide.with(this)
             .load(BuildConfig.BACKDROP_PATH + extras.getString(EX_BACKDROP))
             .placeholder(R.color.colorAccent)
@@ -189,6 +185,6 @@ class DetailItem : AppCompatActivity() {
     }
 
     private fun snackBar(message: String) {
-        Snackbar.make(tv_title,message, Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(tv_title, message, Snackbar.LENGTH_SHORT).show()
     }
 }

@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class Detail (
+data class Detail(
     @SerializedName("id")
     val id: Int,
     @SerializedName("backdrop_path")
@@ -24,4 +24,4 @@ data class Detail (
     val title: String,
     @SerializedName("vote_average")
     val voteAverage: Double
-): Parcelable
+) : Parcelable

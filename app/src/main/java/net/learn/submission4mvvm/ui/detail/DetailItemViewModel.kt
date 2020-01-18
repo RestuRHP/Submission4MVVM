@@ -21,7 +21,7 @@ class DetailItemViewModel : ViewModel() {
         .addConverterFactory(GsonConverterFactory.create())
         .build()
     private val api = retrofit.create(Api::class.java)
-    fun setDetailMovies(id:Int){
+    fun setDetailMovies(id: Int) {
         val itemDetailCall = api.getMovieDetail(id)
         itemDetailCall.enqueue(object : Callback<Detail> {
             override fun onResponse(call: Call<Detail>, response: Response<Detail>) {
@@ -29,16 +29,17 @@ class DetailItemViewModel : ViewModel() {
                 itemDetail.value = responseBody
                 Log.d("Detail", " Movie : $responseBody")
             }
+
             override fun onFailure(call: Call<Detail>, t: Throwable) {
                 Log.w("Response Detail Failed", "Show message" + t.message)
             }
         })
     }
 
-//    internal fun getDetailItem():MutableLiveData<Detail>{
+    //    internal fun getDetailItem():MutableLiveData<Detail>{
 //        return itemDetail
 //    }
     val getDetailItem: LiveData<Detail>
-    get()=itemDetail
+        get() = itemDetail
 
 }
