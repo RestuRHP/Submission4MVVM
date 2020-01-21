@@ -24,8 +24,8 @@ class DetailItemViewModel : ViewModel() {
     fun setDetailMovies(id: Int) {
         val itemDetailCall = api.getMovieDetail(id)
         itemDetailCall.enqueue(object : Callback<Detail> {
-            override fun onResponse(call: Call<Detail>, response: Response<Detail>) {
-                val responseBody = response.body()
+            override fun onResponse(call: Call<Detail>?, response: Response<Detail>?) {
+                val responseBody = response?.body()
                 itemDetail.value = responseBody
                 Log.d("Detail", " Movie : $responseBody")
             }

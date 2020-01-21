@@ -11,42 +11,46 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.learn.submission4mvvm.ui.favorite.FavoriteFragment
 import net.learn.submission4mvvm.ui.movies.MoviesFragment
+import net.learn.submission4mvvm.ui.search.SearchActivity
 import net.learn.submission4mvvm.ui.tvshows.TvShowsFragment
 
 class MainActivity : AppCompatActivity() {
 
-    var fragment = "Movies"
+    var content: Fragment = MoviesFragment()
+    var title = "Movies"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
-        if (savedInstanceState == null) bottomNavigationView.selectedItemId = R.id.navigation_movies
+        if (savedInstanceState == null) {
+            bottomNavigationView.selectedItemId = R.id.navigation_movies
+        }
     }
 
     private val mOnNavigationItemSelectedListener =
         BottomNavigationView.OnNavigationItemSelectedListener { menuItem: MenuItem ->
             when (menuItem.itemId) {
                 R.id.navigation_movies -> {
-//                val title="Movies"
-                    fragment = "Movies"
-                    setActionBarTitle(getString(R.string.movies))
-                    addFragment(MoviesFragment())
+                    content = MoviesFragment()
+                    title = getString(R.string.movies)
+                    setActionBarTitle(title)
+                    addFragment(content)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_tvshows -> {
-//                val title="Tv Shows"
-                    fragment = "Tv Shows"
-                    setActionBarTitle(getString(R.string.tvShows))
-                    addFragment(TvShowsFragment())
+                    content = TvShowsFragment()
+                    title = getString(R.string.tvShows)
+                    setActionBarTitle(title)
+                    addFragment(content)
                     return@OnNavigationItemSelectedListener true
                 }
                 R.id.navigation_favorite -> {
-//                val title="Movies"
-                    fragment = "Favorite"
-                    setActionBarTitle(getString(R.string.favorite))
-                    addFragment(FavoriteFragment())
+                    content = FavoriteFragment()
+                    title = getString(R.string.favorite)
+                    setActionBarTitle(title)
+                    addFragment(content)
                     return@OnNavigationItemSelectedListener true
                 }
             }
@@ -72,34 +76,28 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
         if (item.itemId == R.id.action_settings) {
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+        } else if (item.itemId == R.id.action_search) {
+            val mIntent = Intent(this, SearchActivity::class.java)
             startActivity(mIntent)
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
+        outState.putString("title", title)
+        supportFragmentManager.putFragment(outState, "fragment", content)
         super.onSaveInstanceState(outState)
-
-        outState.putString("Fragment", fragment)
     }
 
     override fun onRestoreInstanceState(savedInstanceState: Bundle) {
         super.onRestoreInstanceState(savedInstanceState)
-        fragment = savedInstanceState.getString("Fragment").toString()
-
-        if (fragment == "Movies") {
-            addFragment(MoviesFragment())
-            bottomNavigationView.selectedItemId = R.id.navigation_movies
-        } else if (fragment == "Tv Shows") {
-            addFragment(TvShowsFragment())
-            bottomNavigationView.selectedItemId = R.id.navigation_tvshows
-
-        } else if (fragment == "Tv Shows") {
-            addFragment(FavoriteFragment())
-            bottomNavigationView.selectedItemId = R.id.navigation_favorite
-
-        }
+        content = supportFragmentManager.getFragment(savedInstanceState, "fragment")!!
+        title = savedInstanceState.getString("title", "")
+        addFragment(content)
+        setActionBarTitle(title)
     }
 }

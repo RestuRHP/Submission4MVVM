@@ -54,6 +54,8 @@ class DetailItem : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detai_item)
 
+        supportActionBar!!.title = intent.getStringExtra(EX_TITLE)
+
         progressBar = findViewById(R.id.progressBar)
 
         helper = Helper(this)

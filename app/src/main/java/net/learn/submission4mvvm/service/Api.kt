@@ -18,6 +18,16 @@ interface Api {
         @Query("page") page: Int
     ): Call<MovieObject>
 
+    //    https://api.themoviedb.org/3/search/movie?api_key=925c18bd71917db0242931c2fce8c338&language=en-US&query=spiderman&page=1
+    @GET("search/{type}")
+    fun getSearch(
+        @Path("type") type: String,
+        @Query("api_key") apiKey: String = BuildConfig.API_KEY,
+        @Query("language") language: String = "en-US",
+        @Query("query") query: String,
+        @Query("page") page: Int
+    ): Call<MovieObject>
+
     //  https://api.themoviedb.org/3/movie/181812?api_key=925c18bd71917db0242931c2fce8c338&language=en-US
     @GET("/movie/{movie_id}?")
     fun getMovieDetail(

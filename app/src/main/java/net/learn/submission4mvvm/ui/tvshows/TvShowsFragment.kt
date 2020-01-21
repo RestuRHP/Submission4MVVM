@@ -25,6 +25,9 @@ class TvShowsFragment : Fragment() {
     private lateinit var adapter: BaseAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var viewModel: BaseViewModel
+    private var listItem: ArrayList<Movie> = ArrayList()
+    private lateinit var movieList: RecyclerView
+    val LIST_STATE_KEY = "recycler_list_state"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +42,11 @@ class TvShowsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = BaseAdapter()
         adapter.notifyDataSetChanged()
-        val tvlist: RecyclerView = view.findViewById(R.id.rv_movies)
-        tvlist.setHasFixedSize(true)
-        tvlist.layoutManager = LinearLayoutManager(this.context)
-        tvlist.adapter = adapter
+        movieList = view.findViewById(R.id.rv_movies)
+        movieList.setHasFixedSize(true)
+        movieList.layoutManager = LinearLayoutManager(this.context)
+        movieList.adapter = adapter
         progressBar = view.findViewById(R.id.progressBar)
-
         viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(
             BaseViewModel::class.java
         )
@@ -54,9 +56,16 @@ class TvShowsFragment : Fragment() {
             }
             showLoading(false)
         })
-        viewModel.setMovies("tv")
-        adapter.setType("tv")
+//        viewModel.setMovies("tv")
+        adapter.setType("movie")
         showLoading(true)
+
+        if (savedInstanceState == null) {
+            viewModel.setMovies("tv")
+        } else {
+            listItem = savedInstanceState.getParcelableArrayList(LIST_STATE_KEY)!!
+            adapter.setData(listItem)
+        }
     }
 
     private fun showLoading(state: Boolean) {
@@ -65,5 +74,10 @@ class TvShowsFragment : Fragment() {
         } else {
             progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(LIST_STATE_KEY, listItem)
+        super.onSaveInstanceState(outState)
     }
 }

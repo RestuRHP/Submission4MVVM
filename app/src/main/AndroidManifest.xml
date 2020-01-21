@@ -11,11 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".ui.search.SearchActivity"></activity>
+
         <provider
             android:name=".provider.MovieProvider"
             android:authorities="net.learn.submission4mvvm"
             android:enabled="true"
-            android:exported="true"></provider>
+            android:exported="true" />
 
         <activity android:name=".ui.detail.DetailItem" />
         <activity android:name=".MainActivity">

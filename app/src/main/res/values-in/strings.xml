@@ -13,8 +13,14 @@
     <string name="tvShows"> Acara TV </string>
     <string name="favorite"> Favorit </string>
     <string name="icon_star">icon star</string>
-    <string name="image_white">image white</string>
+    <string name="image_white">Gambar Putih</string>
     <string name="lorem">-</string>
     <string name="settings">Pengaturan</string>
-    <string name="search">Search</string>
+    <string name="search">Pencarian</string>
+    <string name="search_hint">Pencarian Film atau Acara Tv</string>
+    <string name="not_found">Tidak Ditemukan</string>
+    <string-array name="search_filter_array">
+        <item>Film</item>
+        <item>Acara TV </item>
+    </string-array>
 </resources>

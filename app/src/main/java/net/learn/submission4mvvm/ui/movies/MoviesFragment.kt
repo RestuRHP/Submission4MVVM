@@ -15,7 +15,6 @@ import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.base.BaseAdapter
 import net.learn.submission4mvvm.ui.base.BaseViewModel
-import java.util.*
 
 /**
  * A simple [Fragment] subclass.
@@ -25,13 +24,15 @@ class MoviesFragment : Fragment() {
     private lateinit var adapter: BaseAdapter
     private lateinit var progressBar: ProgressBar
     private lateinit var viewModel: BaseViewModel
+    private var listItem: ArrayList<Movie> = ArrayList()
+    private lateinit var movieList: RecyclerView
+    val LIST_STATE_KEY = "recycler_list_state"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_display, container, false)
-
         return view
     }
 
@@ -39,7 +40,7 @@ class MoviesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = BaseAdapter()
         adapter.notifyDataSetChanged()
-        val movieList: RecyclerView = view.findViewById(R.id.rv_movies)
+        movieList = view.findViewById(R.id.rv_movies)
         movieList.setHasFixedSize(true)
         movieList.layoutManager = LinearLayoutManager(this.context)
         movieList.adapter = adapter
@@ -53,9 +54,16 @@ class MoviesFragment : Fragment() {
             }
             showLoading(false)
         })
-        viewModel.setMovies("movie")
+//        viewModel.setMovies("movie")
         adapter.setType("movie")
         showLoading(true)
+
+        if (savedInstanceState == null) {
+            viewModel.setMovies("movie")
+        } else {
+            listItem = savedInstanceState.getParcelableArrayList(LIST_STATE_KEY)!!
+            adapter.setData(listItem)
+        }
     }
 
     private fun showLoading(state: Boolean) {
@@ -64,6 +72,11 @@ class MoviesFragment : Fragment() {
         } else {
             progressBar.visibility = View.GONE
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        outState.putParcelableArrayList(LIST_STATE_KEY, listItem)
+        super.onSaveInstanceState(outState)
     }
 
 }

@@ -4,11 +4,11 @@ package net.learn.submission4.data.response
 import com.google.gson.annotations.SerializedName
 import net.learn.submission4mvvm.model.movies.Movie
 
-data class MoviesResponse(
+data class MovieResponse(
     @SerializedName("page")
-    val page: Int,
+    var page: Int,
     @SerializedName("results")
-    val results: List<Movie>,
+    var results: List<Movie>,
     @SerializedName("total_pages")
-    val totalPages: Int
+    var totalPages: Int
 )
