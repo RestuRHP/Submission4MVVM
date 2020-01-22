@@ -19,6 +19,9 @@
     <string name="search">Pencarian</string>
     <string name="search_hint">Pencarian Film atau Acara Tv</string>
     <string name="not_found">Tidak Ditemukan</string>
+    <string name="empty_text">Data Not Found</string>
+    <string name="appwidget_text">Favorite</string>
+    <string name="image">Image</string>
     <string-array name="search_filter_array">
         <item>Film</item>
         <item>Acara TV </item>

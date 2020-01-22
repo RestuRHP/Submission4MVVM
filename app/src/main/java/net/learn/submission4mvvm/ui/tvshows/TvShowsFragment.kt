@@ -57,7 +57,7 @@ class TvShowsFragment : Fragment() {
             showLoading(false)
         })
 //        viewModel.setMovies("tv")
-        adapter.setType("movie")
+        adapter.setType("tv")
         showLoading(true)
 
         if (savedInstanceState == null) {

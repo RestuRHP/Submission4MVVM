@@ -77,6 +77,42 @@ class Helper(context: Context) {
         return arrayList
     }
 
+    fun queryAllWidget(): ArrayList<Movie> {
+        val arrayList = ArrayList<Movie>()
+        val cursor = dataBase.query(
+            DATABASE_TABLE,
+            null,
+            null,
+            null,
+            null,
+            null,
+            "$_ID ASC",
+            null
+        )
+        cursor.moveToFirst()
+        var movie: Movie
+        if (cursor.count > 0) {
+            do {
+                movie = Movie(
+                    cursor.getInt(cursor.getColumnIndexOrThrow(_ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(BACKDROP)),
+                    cursor.getInt(cursor.getColumnIndexOrThrow(ID)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(ORIGINAL_LANG)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(OVERVIEW)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(POSTER)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(RELEASE_DATE)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(TITLE)),
+                    cursor.getDouble(cursor.getColumnIndexOrThrow(RATING)),
+                    cursor.getString(cursor.getColumnIndexOrThrow(fTYPE))
+                )
+                arrayList.add(movie)
+                cursor.moveToNext()
+            } while (!cursor.isAfterLast)
+        }
+        cursor.close()
+        return arrayList
+    }
+
     fun queryAll2(): Cursor {
         return dataBase.query(
             DATABASE_TABLE,

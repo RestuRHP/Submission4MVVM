@@ -24,7 +24,6 @@ class SearchActivity : AppCompatActivity() {
 
     private lateinit var viewModel: BaseViewModel
     private lateinit var adapter: BaseAdapter
-    private lateinit var fragment: MovieSearchFragment
     val EXTRA_QUERY = "extra_query"
     private var query: String = ""
 
@@ -41,8 +40,8 @@ class SearchActivity : AppCompatActivity() {
             applicationContext, android.R.layout.simple_spinner_dropdown_item,
             resources.getStringArray(R.array.search_filter_array)
         )
-        spinner_search_result.adapter = arrayAdapter
-        spinner_search_result.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+        type_spinner.adapter = arrayAdapter
+        type_spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
             override fun onNothingSelected(parent: AdapterView<*>?) {
             }
 
@@ -54,10 +53,12 @@ class SearchActivity : AppCompatActivity() {
             ) {
 //                progressBar_search_result.visibility = View.VISIBLE
                 tv_not_found_search_result.visibility = View.GONE
-                if (spinner_search_result.selectedItemPosition == 0) {
+                if (type_spinner.selectedItemPosition == 0) {
                     getListItem("movie", query)
+                    adapter.setType("movie")
                 } else {
                     getListItem("tv", query)
+                    adapter.setType("tv")
                 }
             }
         }
@@ -104,7 +105,7 @@ class SearchActivity : AppCompatActivity() {
             override fun onQueryTextChange(p0: String?): Boolean {
                 query = p0.toString()
 //                progressBar_search_result.visibility = View.VISIBLE
-                if (spinner_search_result.selectedItemPosition == 0) {
+                if (type_spinner.selectedItemPosition == 0) {
                     getListItem("movie", query)
                     adapter.setType("movie")
                 } else {
