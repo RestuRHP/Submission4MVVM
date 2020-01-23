@@ -3,4 +3,7 @@
     <color name="colorPrimary">#2784ff</color>
     <color name="colorPrimaryDark">#0058cb</color>
     <color name="colorAccent">#73b3ff</color>
+    <color name="movie">#2095ED</color>
+    <color name="tv">#6437B3</color>
+    <color name="favorite">#E51C60</color>
 </resources>

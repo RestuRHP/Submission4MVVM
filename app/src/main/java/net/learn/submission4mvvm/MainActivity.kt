@@ -51,6 +51,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener)
         if (savedInstanceState == null) {
             bottomNavigationView.selectedItemId = R.id.navigation_movies

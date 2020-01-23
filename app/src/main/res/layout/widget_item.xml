@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:adjustViewBounds="true"
         android:contentDescription="@string/image"
-        android:scaleType="fitCenter"
+        android:scaleType="fitXY"
         tools:srcCompat="@drawable/terminator2" />
 
 </LinearLayout>

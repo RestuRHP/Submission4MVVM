@@ -61,10 +61,11 @@ class FavoriteTvShows : Fragment() {
             Log.d("GET Data TvShows: ", "$favorite")
             if (favorite.size > 0) {
                 adapterBase.listFavorite = favorite
-            } else {
-                adapterBase.listFavorite = ArrayList()
-                showSnackbarMessage("Tidak ada data saat ini")
             }
+//            else {
+//                adapterBase.listFavorite = ArrayList()
+//                showSnackbarMessage("")
+//            }
         }
     }
 

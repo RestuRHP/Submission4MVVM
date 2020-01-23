@@ -57,6 +57,8 @@ dependencies {
 
     implementation group: 'androidx.preference', name: 'preference', version: '1.1.0'
 
+    implementation 'com.ismaeldivita.chipnavigation:chip-navigation-bar:1.2.0'
+
     implementation 'com.google.firebase:firebase-messaging:20.1.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

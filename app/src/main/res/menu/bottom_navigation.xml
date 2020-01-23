@@ -1,17 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cnb_unselectedColor="@color/colorAccent">
 
     <item
         android:id="@+id/navigation_movies"
         android:icon="@drawable/ic_movie"
-        android:title="@string/movies" />
+        android:title="@string/movies"
+        app:cnb_iconColor="@color/movie" />
     <item
         android:id="@+id/navigation_tvshows"
         android:icon="@drawable/ic_live_tv"
-        android:title="@string/tvShows" />
+        android:title="@string/tvShows"
+        app:cnb_iconColor="@color/tv" />
     <item
         android:id="@+id/navigation_favorite"
-        android:icon="@drawable/ic_favorite"
-        android:title="@string/favorite" />
+        android:icon="@drawable/ic_unfavorite"
+        android:title="@string/favorite"
+        app:cnb_iconColor="@color/favorite" />
 
 </menu>

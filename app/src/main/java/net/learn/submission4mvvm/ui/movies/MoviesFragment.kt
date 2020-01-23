@@ -2,6 +2,7 @@ package net.learn.submission4mvvm.ui.movies
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -60,9 +61,11 @@ class MoviesFragment : Fragment() {
 
         if (savedInstanceState == null) {
             viewModel.setMovies("movie")
+            Log.d("State null", "$savedInstanceState")
         } else {
             listItem = savedInstanceState.getParcelableArrayList(LIST_STATE_KEY)!!
             adapter.setData(listItem)
+            Log.d("State not null", "$savedInstanceState")
         }
     }
 

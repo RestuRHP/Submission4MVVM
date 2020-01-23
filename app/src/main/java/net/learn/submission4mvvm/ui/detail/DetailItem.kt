@@ -198,6 +198,7 @@ class DetailItem : AppCompatActivity() {
         val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
         sendBroadcast(updateIntent)
+//        man.notifyAppWidgetViewDataChanged(ids,R.id.stack_view)
     }
 
     private fun snackBar(message: String) {
