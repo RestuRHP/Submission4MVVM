@@ -1,4 +1,4 @@
-package net.learn.submission4mvvm.ui.widget
+package net.learn.submission4mvvm.widget
 
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
@@ -15,8 +15,8 @@ import net.learn.submission4mvvm.R
  */
 class WidgetFavorite : AppWidgetProvider() {
 
-    val TOAST_ACTION = "TOAST_ACTION"
-    val EXTRA_ITEM = "EXTRA_ITEM"
+    val toast = "TOAST_ACTION"
+    val exItem = "EXTRA_ITEM"
 
     companion object {
         internal fun updateAppWidget(
@@ -34,11 +34,16 @@ class WidgetFavorite : AppWidgetProvider() {
                 R.id.empty_view
             )
             val toastIntent = Intent(context, WidgetFavorite::class.java)
-            toastIntent.action = WidgetFavorite().TOAST_ACTION
+            toastIntent.action = WidgetFavorite().toast
             toastIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId)
             intent.data = Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME))
             val toastPendingIntent =
-                PendingIntent.getBroadcast(context, 0, toastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+                PendingIntent.getBroadcast(
+                    context,
+                    0,
+                    toastIntent,
+                    PendingIntent.FLAG_UPDATE_CURRENT
+                )
             views.setPendingIntentTemplate(R.id.stack_view, toastPendingIntent)
             appWidgetManager.updateAppWidget(appWidgetId, views)
         }
@@ -58,12 +63,13 @@ class WidgetFavorite : AppWidgetProvider() {
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
         if (intent?.action != null) {
-            if (intent.action == TOAST_ACTION) {
-                val viewIndex = intent.getIntExtra(EXTRA_ITEM, 0)
+            if (intent.action == toast) {
+                val viewIndex = intent.getIntExtra(exItem, 0)
                 Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
             }
         }
     }
+
     override fun onEnabled(context: Context) {
         // Enter relevant functionality for when the first widget is created
     }

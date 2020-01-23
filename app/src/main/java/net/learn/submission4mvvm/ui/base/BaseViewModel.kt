@@ -30,12 +30,12 @@ class BaseViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     listMovies.value = responseBody?.results
-                    Log.d("Repository", " List Item : ${response.body()?.results}")
+                    Log.d("Repository", "List Today :${responseBody?.results}")
                 }
             }
 
             override fun onFailure(call: Call<MovieObject>, t: Throwable) {
-                Log.d("Response Failure", "" + t.message)
+                Log.d("setMovies Failure", "" + t.message)
             }
         })
     }
@@ -47,12 +47,29 @@ class BaseViewModel : ViewModel() {
                 if (response.isSuccessful) {
                     val responseBody = response.body()
                     listMovies.value = responseBody?.results
-                    Log.d("Repository", " List Search : ${response.body()?.results}")
+                    Log.d("Repository", "List Today :${responseBody?.results}")
                 }
             }
 
             override fun onFailure(call: Call<MovieObject>, t: Throwable) {
-                Log.d("Response Failure", "" + t.message)
+                Log.d("searchMovie Failure", "" + t.message)
+            }
+        })
+    }
+
+    fun releaseToday(firstDate: String, lastDate: String) {
+        val movieObjectCall = api.getReleaseToday(firstDate = firstDate, lastDate = lastDate)
+        movieObjectCall.enqueue(object : Callback<MovieObject> {
+            override fun onResponse(call: Call<MovieObject>, response: Response<MovieObject>) {
+                if (response.isSuccessful) {
+                    val responseBody = response.body()
+                    listMovies.value = responseBody?.results
+                    Log.d("Repository", "List Today :${responseBody?.results}")
+                }
+            }
+
+            override fun onFailure(call: Call<MovieObject>, t: Throwable) {
+                Log.d("releaseToday Failure", "" + t.message)
             }
         })
     }

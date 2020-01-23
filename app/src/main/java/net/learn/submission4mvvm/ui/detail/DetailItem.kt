@@ -1,6 +1,5 @@
 package net.learn.submission4mvvm.ui.detail
 
-import android.appwidget.AppWidgetManager
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -19,7 +18,7 @@ import net.learn.submission4mvvm.db.DBFavorite
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
 import net.learn.submission4mvvm.model.movies.Movie
-import net.learn.submission4mvvm.ui.widget.WidgetFavorite
+import net.learn.submission4mvvm.widget.WidgetFavorite
 
 class DetailItem : AppCompatActivity() {
 
@@ -108,7 +107,8 @@ class DetailItem : AppCompatActivity() {
             } else {
                 addToFavorite()
                 val toastIntent = Intent(this, WidgetFavorite::class.java)
-                toastIntent.action = WidgetFavorite().TOAST_ACTION
+                toastIntent.action = WidgetFavorite().toast
+
                 this.sendBroadcast(toastIntent)
             }
             isFavorite = !isFavorite

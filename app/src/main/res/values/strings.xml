@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Submission 4 MVVM</string>
+    <string name="app_name">Movie Catalogue</string>
     <string name="title_film">Title Film</string>
     <string name="time">release</string>
     <string name="overview">Overview</string>
@@ -25,5 +25,13 @@
         <item>Movie</item>
         <item>TV Show</item>
     </string-array>
-    <string name="add_widget">Add widget</string>
+    <string name="default_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_channel_name" translatable="false">MovieCatalogueReminder</string>
+    <string name="daily_notif_message">Good morning, we missing you!,Tap to open</string>
+    <string name="release_notif_message">Tap! for look new film release today!</string>
+    <string name="reminder">Reminder</string>
+    <string name="toast_reminder_enabled">%Reminder enabled</string>
+    <string name="toast_reminder_disabled">%Reminder disabled</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="daily_reminder">Daily Reminder</string>
 </resources>

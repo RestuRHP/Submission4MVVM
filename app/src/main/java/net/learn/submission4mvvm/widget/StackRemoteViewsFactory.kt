@@ -1,12 +1,12 @@
-package net.learn.submission4mvvm.ui.widget
+package net.learn.submission4mvvm.widget
 
 import android.content.Context
-import android.widget.RemoteViews
-import android.widget.RemoteViewsService
 import android.content.Intent
 import android.os.Binder
 import android.os.Bundle
 import android.util.Log
+import android.widget.RemoteViews
+import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.Target
 import net.learn.submission4mvvm.BuildConfig
@@ -42,7 +42,7 @@ class StackRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteV
         Binder.restoreCallingIdentity(identityToken)
     }
 
-    fun loadWidget(){
+    fun loadWidget() {
         onDataSetChanged()
     }
 
@@ -60,7 +60,7 @@ class StackRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteV
 
         rv.setImageViewBitmap(R.id.imageView, poster)
         val extras = Bundle()
-        extras.putInt(WidgetFavorite().EXTRA_ITEM, position)
+        extras.putInt(WidgetFavorite().exItem, position)
         val fillInIntent = Intent()
         fillInIntent.putExtras(extras)
         rv.setOnClickFillInIntent(R.id.imageView, fillInIntent)

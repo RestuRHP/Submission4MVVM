@@ -1,4 +1,4 @@
-package net.learn.submission4mvvm.ui.widget
+package net.learn.submission4mvvm.widget
 
 import android.content.Intent
 import android.widget.RemoteViewsService

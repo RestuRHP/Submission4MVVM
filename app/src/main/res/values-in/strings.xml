@@ -1,29 +1,73 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="app_name"> Submission 4 MVVM </string>
+<resources>    
+    <string name="app_name"> Movie Catalogue </string>
+        
     <string name="title_film"> Judul Film </string>
+        
     <string name="time"> lepaskan </string>
+        
     <string name="overview"> Ikhtisar </string>
+        
     <string name="image_rating"> Peringkat Gambar </string>
+        
     <string name="rating"> Peringkat </string>
+        
     <string name="image_lang"> Bahasa Gambar </string>
+        
     <string name="language"> Bahasa </string>
+        
     <string name="image_poster"> Poster Gambar </string>
+        
     <string name="movies"> Film </string>
+        
     <string name="tvShows"> Acara TV </string>
-    <string name="favorite"> Favorit </string>
-    <string name="icon_star">icon star</string>
-    <string name="image_white">Gambar Putih</string>
-    <string name="lorem">-</string>
-    <string name="settings">Pengaturan</string>
-    <string name="search">Pencarian</string>
-    <string name="search_hint">Pencarian Film atau Acara Tv</string>
-    <string name="not_found">Tidak Ditemukan</string>
-    <string name="empty_text">Data Not Found</string>
-    <string name="appwidget_text">Favorite</string>
-    <string name="image">Image</string>
-    <string-array name="search_filter_array">
-        <item>Film</item>
-        <item>Acara TV </item>
+        
+    <string name="favorite"> Favorite </string>
+        
+    <string name="icon_star"> icon star </string>
+        
+    <string name="image_white"> gambar putih </string>
+        
+    <string name="lorem"> - </string>
+        
+    <string name="settings"> Setting </string>
+        
+    <string name="search"> Cari </string>
+        
+    <string name="search_hint"> Cari Film atau Acara TV </string>
+        
+    <string name="not_found"> ​​Tidak Ditemukan </string>
+        
+    <string name="empty_text"> Data Tidak Ditemukan </string>
+        
+    <string name="appwidget_text"> Favorit </string>
+        
+    <string name="image"> Gambar </string>
+        
+    <string-array name="search_filter_array">        
+        <item> Film </item>
+                
+        <item> Acara TV </item>
+            
     </string-array>
+    <![CDATA[
+        
+        
+    ]]>
+    <string name="default_channel_id" transValue="false"> fcm_default_channel </string>
+        
+    <string name="default_channel_name" transValue="false"> MovieCatalogueReminder </string>
+        
+    <string name="daily_notif_message"> Selamat pagi, kami merindukanmu!!,Tap untuk membuka </string>
+        
+    <string name="release_notif_message"> Tap! untuk melihat rilis film baru hari ini!! </string>
+        
+    <string name="reminder"> Reminder </string>
+        
+    <string name="toast_reminder_enabled">% pengingat diaktifkan </string>
+        
+    <string name="toast_reminder_disabled">% pengingat dinonaktifkan </string>
+        
+    <string name="release_reminder"> Rilis Pengingat </string>
+        
+    <string name="daily_reminder"> Pengingat Harian </string>
 </resources>
