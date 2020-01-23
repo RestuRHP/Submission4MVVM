@@ -1,7 +1,6 @@
 package net.learn.submission4mvvm.ui.base
 
 import android.content.Intent
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -34,7 +33,6 @@ class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
         movieData.clear()
         movieData.addAll(item)
         notifyDataSetChanged()
-        Log.d("List Adapter", ":$movieData")
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {

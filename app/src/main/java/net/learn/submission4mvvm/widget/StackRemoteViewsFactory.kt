@@ -42,10 +42,6 @@ class StackRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteV
         Binder.restoreCallingIdentity(identityToken)
     }
 
-    fun loadWidget() {
-        onDataSetChanged()
-    }
-
     override fun hasStableIds(): Boolean {
         return false
     }

@@ -51,7 +51,6 @@ class SearchActivity : AppCompatActivity() {
                 position: Int,
                 id: Long
             ) {
-//                progressBar_search_result.visibility = View.VISIBLE
                 tv_not_found_search_result.visibility = View.GONE
                 if (type_spinner.selectedItemPosition == 0) {
                     getListItem("movie", query)
@@ -89,22 +88,12 @@ class SearchActivity : AppCompatActivity() {
         searchView.queryHint = resources.getString(R.string.search_hint)
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(p0: String?): Boolean {
-//                query = p0.toString()
-//                progressBar_search_result.visibility = View.VISIBLE
-//                if (spinner_search_result.selectedItemPosition == 0){
-//                    getListItem("movie",query)
-//                    adapter.setType("movie")
-//                }else{
-//                    getListItem("tv",query)
-//                    adapter.setType("tv")
-//                }
 
                 return true
             }
 
             override fun onQueryTextChange(p0: String?): Boolean {
                 query = p0.toString()
-//                progressBar_search_result.visibility = View.VISIBLE
                 if (type_spinner.selectedItemPosition == 0) {
                     getListItem("movie", query)
                     adapter.setType("movie")

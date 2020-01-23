@@ -1,5 +1,7 @@
 package net.learn.submission4mvvm.ui.detail
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.ContentValues
 import android.content.Intent
 import android.os.Bundle
@@ -101,15 +103,10 @@ class DetailItem : AppCompatActivity() {
         return if (item.itemId == R.id.action_add_fav) {
             if (isFavorite) {
                 removeFavorite()
-//                val toastIntent = Intent(this, WidgetFavorite::class.java)
-//                toastIntent.action = WidgetFavorite().TOAST_ACTION
-//                this.sendBroadcast(toastIntent)
+                widgetUpdate()
             } else {
                 addToFavorite()
-                val toastIntent = Intent(this, WidgetFavorite::class.java)
-                toastIntent.action = WidgetFavorite().toast
-
-                this.sendBroadcast(toastIntent)
+                widgetUpdate()
             }
             isFavorite = !isFavorite
             setFavorite()
@@ -193,6 +190,14 @@ class DetailItem : AppCompatActivity() {
         } else {
             progressBar.visibility = View.GONE
         }
+    }
+
+    fun widgetUpdate() {
+        val man = AppWidgetManager.getInstance(this)
+        val ids = man.getAppWidgetIds(ComponentName(this, WidgetFavorite::class.java))
+        val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
+        sendBroadcast(updateIntent)
     }
 
     private fun snackBar(message: String) {
