@@ -63,9 +63,9 @@
         
     <string name="reminder"> Reminder </string>
         
-    <string name="toast_reminder_enabled">% pengingat diaktifkan </string>
+    <string name="toast_reminder_enabled">%1s pengingat diaktifkan </string>
         
-    <string name="toast_reminder_disabled">% pengingat dinonaktifkan </string>
+    <string name="toast_reminder_disabled">%1s pengingat dinonaktifkan </string>
         
     <string name="release_reminder"> Rilis Pengingat </string>
         

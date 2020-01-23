@@ -188,7 +188,9 @@ class Receiver : BroadcastReceiver() {
         alarmManager.cancel(pendingIntent)
 
         Toast.makeText(
-            context, context.getString(R.string.toast_reminder_disabled, type), Toast.LENGTH_SHORT
+            context,
+            context.getString(R.string.toast_reminder_disabled, type),
+            Toast.LENGTH_SHORT
         ).show()
 
     }
