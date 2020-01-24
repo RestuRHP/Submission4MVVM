@@ -1,6 +1,7 @@
 package net.learn.submission4mvvm.ui.detail
 
 import android.appwidget.AppWidgetManager
+import android.content.ClipData
 import android.content.ComponentName
 import android.content.ContentValues
 import android.content.Intent
@@ -14,18 +15,25 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_detai_item.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
 import net.learn.submission4mvvm.BuildConfig
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.db.DBFavorite
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.db.MappingHelper
 import net.learn.submission4mvvm.model.movies.Movie
+import net.learn.submission4mvvm.ui.base.BaseFavoriteAdapter
 import net.learn.submission4mvvm.widget.WidgetFavorite
 
 class DetailItem : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var helper: Helper
+    private var adapterBase: BaseFavoriteAdapter = BaseFavoriteAdapter()
+    private var item: ClipData.Item? = null
 
     private var fId = 0
     private var fType = ""
@@ -103,10 +111,10 @@ class DetailItem : AppCompatActivity() {
         return if (item.itemId == R.id.action_add_fav) {
             if (isFavorite) {
                 removeFavorite()
-                widgetUpdate()
+                checkDb()
             } else {
                 addToFavorite()
-                widgetUpdate()
+                checkDb()
             }
             isFavorite = !isFavorite
             setFavorite()
@@ -192,13 +200,48 @@ class DetailItem : AppCompatActivity() {
         }
     }
 
-    fun widgetUpdate() {
+    private fun widgetUpdate() {
         val man = AppWidgetManager.getInstance(this)
         val ids = man.getAppWidgetIds(ComponentName(this, WidgetFavorite::class.java))
         val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
         sendBroadcast(updateIntent)
-//        man.notifyAppWidgetViewDataChanged(ids,R.id.stack_view)
+        man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
+    }
+
+    private fun widgetUpdateEmpty() {
+        val man = AppWidgetManager.getInstance(this)
+        val ids = man.getAppWidgetIds(ComponentName(this, WidgetFavorite::class.java))
+        val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+        updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
+        sendBroadcast(updateIntent)
+        man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
+        man.notifyAppWidgetViewDataChanged(ids, R.id.empty_view)
+    }
+
+    private fun checkDb() {
+        GlobalScope.launch(Dispatchers.Main) {
+            helper.open()
+            val deferredFavorite = async(Dispatchers.IO) {
+                val cursor = helper.queryAll2()
+                MappingHelper.maping(cursor)
+            }
+            progressBar.visibility = View.INVISIBLE
+            val favorite = deferredFavorite.await()
+            val emptyText = findViewById<View>(R.id.empty_view)
+            if (favorite.size > 0) {
+                item?.let {
+                    emptyText.visibility = View.GONE
+                }
+                widgetUpdate()
+            } else {
+                item?.let {
+                    emptyText.visibility = View.VISIBLE
+                }
+                widgetUpdateEmpty()
+            }
+            helper.close()
+        }
     }
 
     private fun snackBar(message: String) {
