@@ -9,11 +9,11 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.learn.submission4mvvm.notification.Receiver
-import net.learn.submission4mvvm.notification.SharedPrefManager
 import net.learn.submission4mvvm.ui.favorite.FavoriteFragment
 import net.learn.submission4mvvm.ui.movies.MoviesFragment
 import net.learn.submission4mvvm.ui.search.SearchActivity
 import net.learn.submission4mvvm.ui.setting.SettingActivity
+import net.learn.submission4mvvm.ui.setting.SharedPrefManager
 import net.learn.submission4mvvm.ui.tvshows.TvShowsFragment
 
 class MainActivity : AppCompatActivity() {
@@ -26,7 +26,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val sharedPref = SharedPrefManager(applicationContext).getInstance(applicationContext)
+        val sharedPref = SharedPrefManager(
+            applicationContext
+        ).getInstance(applicationContext)
         if (sharedPref.checkInit() == 0) {
             sharedPref.setDailyReminder(true)
             sharedPref.setReleaseReminder(true)

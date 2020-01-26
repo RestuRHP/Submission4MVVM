@@ -11,7 +11,6 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreferenceCompat
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.notification.Receiver
-import net.learn.submission4mvvm.notification.SharedPrefManager
 
 /**
  * A simple [Fragment] subclass.
@@ -20,7 +19,9 @@ class SettingFragment : PreferenceFragmentCompat() {
     private var receiver = Receiver()
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
-        val sharedPref = SharedPrefManager(context as Context).getInstance(context as Context)
+        val sharedPref = SharedPrefManager(
+            context as Context
+        ).getInstance(context as Context)
 
         val dailyReminderSwitch = findPreference<SwitchPreferenceCompat>("daily_reminder")
         val releaseReminderSwitch = findPreference<SwitchPreferenceCompat>("release_reminder")

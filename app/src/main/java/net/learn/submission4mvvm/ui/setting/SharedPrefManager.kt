@@ -1,4 +1,4 @@
-package net.learn.submission4mvvm.notification
+package net.learn.submission4mvvm.ui.setting
 
 import android.content.Context
 import android.content.SharedPreferences
@@ -17,7 +17,8 @@ class SharedPrefManager(val context: Context) {
     @Synchronized
     fun getInstance(context: Context): SharedPrefManager {
         if (mInstance == null) {
-            mInstance = SharedPrefManager(context)
+            mInstance =
+                SharedPrefManager(context)
         }
         return mInstance as SharedPrefManager
     }
