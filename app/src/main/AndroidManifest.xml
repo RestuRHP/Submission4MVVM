@@ -14,7 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.setting.SettingActivity"></activity>
-        <activity android:name=".notification.ReleaseTodayActivity" />
+        <activity android:name=".ReleaseTodayActivity" />
 
         <receiver android:name=".widget.WidgetFavorite">
             <intent-filter>

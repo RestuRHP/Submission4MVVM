@@ -2,7 +2,6 @@ package net.learn.submission4mvvm
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -10,7 +9,6 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 import net.learn.submission4mvvm.notification.Receiver
-import net.learn.submission4mvvm.notification.ReleaseTodayActivity
 import net.learn.submission4mvvm.notification.SharedPrefManager
 import net.learn.submission4mvvm.ui.favorite.FavoriteFragment
 import net.learn.submission4mvvm.ui.movies.MoviesFragment
@@ -46,7 +44,6 @@ class MainActivity : AppCompatActivity() {
             if (type == "release") {
                 val intent = Intent(applicationContext, ReleaseTodayActivity::class.java)
                 intent.putExtra("list", this.intent.getSerializableExtra("list"))
-                Log.d("tes123", "list = ${this.intent.getSerializableExtra("list")}")
                 startActivity(intent)
             }
         }

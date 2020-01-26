@@ -4,7 +4,7 @@ import android.database.Cursor
 import net.learn.submission4mvvm.model.movies.Movie
 
 object MappingHelper {
-    fun maping(favCursor: Cursor): ArrayList<Movie> {
+    fun mapping(favCursor: Cursor): ArrayList<Movie> {
         val favList = ArrayList<Movie>()
 //        favCursor.moveToFirst()
         while (favCursor.moveToNext()) {

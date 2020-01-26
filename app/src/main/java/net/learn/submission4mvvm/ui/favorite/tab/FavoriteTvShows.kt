@@ -54,7 +54,7 @@ class FavoriteTvShows : Fragment() {
             progressBar.visibility = View.VISIBLE
             val deferredFavorite = async(Dispatchers.IO) {
                 val cursor = helper.queryByType("tv")
-                MappingHelper.maping(cursor)
+                MappingHelper.mapping(cursor)
             }
             progressBar.visibility = View.INVISIBLE
             val favorite = deferredFavorite.await()

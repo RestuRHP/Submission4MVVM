@@ -1,4 +1,4 @@
-package net.learn.submission4mvvm.notification
+package net.learn.submission4mvvm
 
 import android.os.Bundle
 import android.view.View
@@ -8,7 +8,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import kotlinx.android.synthetic.main.activity_release_today.*
-import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.base.BaseAdapter
 import net.learn.submission4mvvm.ui.base.BaseViewModel

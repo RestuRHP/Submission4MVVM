@@ -7,6 +7,8 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
+import android.content.res.Resources
+import android.graphics.BitmapFactory
 import android.media.RingtoneManager
 import android.os.Build
 import android.util.Log
@@ -145,7 +147,8 @@ class Receiver : BroadcastReceiver() {
             context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
         val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
         val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
-            .setSmallIcon(R.drawable.ic_movie)
+            .setSmallIcon(R.mipmap.movie)
+            .setLargeIcon(BitmapFactory.decodeResource(Resources.getSystem(), R.mipmap.movie))
             .setContentTitle(title)
             .setContentText(message)
             .setAutoCancel(true)

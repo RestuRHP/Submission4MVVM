@@ -54,7 +54,7 @@ class FavoriteMovies : Fragment() {
             progressBar.visibility = View.VISIBLE
             val deferredFavorite = async(Dispatchers.IO) {
                 val cursor = helper.queryByType("movie")
-                MappingHelper.maping(cursor)
+                MappingHelper.mapping(cursor)
             }
             progressBar.visibility = View.INVISIBLE
             val favorite = deferredFavorite.await()
@@ -63,12 +63,12 @@ class FavoriteMovies : Fragment() {
                 adapterBase.listFavorite = favorite
             } else {
                 adapterBase.listFavorite = ArrayList()
-                showSnackbarMessage("Tidak ada data saat ini")
+                showSnackBarMessage("Tidak ada data saat ini")
             }
         }
     }
 
-    private fun showSnackbarMessage(message: String) {
+    private fun showSnackBarMessage(message: String) {
         Snackbar.make(rv_movies, message, Snackbar.LENGTH_SHORT).show()
     }
 

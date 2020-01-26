@@ -3,6 +3,7 @@ package net.learn.submission4mvvm.widget
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
+import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
@@ -65,8 +66,15 @@ class WidgetFavorite : AppWidgetProvider() {
             if (intent.action == toast) {
                 val viewIndex = intent.getIntExtra(exItem, 0)
                 Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
+
+                val man = AppWidgetManager.getInstance(context)
+                val ids = man.getAppWidgetIds(ComponentName(context!!, WidgetFavorite::class.java))
+                val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
+                man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
             }
         }
+
     }
 
     override fun onEnabled(context: Context) {

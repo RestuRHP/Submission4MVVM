@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 
 class SharedPrefManager(val context: Context) {
 
-    private val SHARED_PREF_NAME = "submission5madesharedpref"
+    private val SHARED_PREF_NAME = "submission4mvvm"
     private val KEY_DAILY = "daily_reminder"
     private val KEY_RELEASE = "release_reminder"
     private val KEY_INIT = "init"

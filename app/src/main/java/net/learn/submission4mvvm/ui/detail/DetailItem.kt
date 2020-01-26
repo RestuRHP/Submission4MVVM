@@ -85,7 +85,7 @@ class DetailItem : AppCompatActivity() {
     private fun check() {
         helper.open()
         val cursor = helper.queryById(id.toString())
-        val inDB: ArrayList<Movie> = MappingHelper.maping(cursor)
+        val inDB: ArrayList<Movie> = MappingHelper.mapping(cursor)
         Log.d("Check ID", "$id")
         Log.d("Check Data in DB", "$inDB")
         for (movie in inDB) {
@@ -216,7 +216,6 @@ class DetailItem : AppCompatActivity() {
         updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
         sendBroadcast(updateIntent)
         man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
-        man.notifyAppWidgetViewDataChanged(ids, R.id.empty_view)
     }
 
     private fun checkDb() {
@@ -224,7 +223,7 @@ class DetailItem : AppCompatActivity() {
             helper.open()
             val deferredFavorite = async(Dispatchers.IO) {
                 val cursor = helper.queryAll2()
-                MappingHelper.maping(cursor)
+                MappingHelper.mapping(cursor)
             }
             progressBar.visibility = View.INVISIBLE
             val favorite = deferredFavorite.await()

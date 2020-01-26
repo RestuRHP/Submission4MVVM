@@ -30,7 +30,7 @@ class FavoriteMoviesProvider : Fragment() {
     private lateinit var helper: Helper
     private lateinit var listFavorite: ArrayList<Movie>
 
-    private var Thread: HandlerThread? = null
+    private var thread: HandlerThread? = null
     private var mObserver: DataObserver? = null
 
     override fun onCreateView(
@@ -50,9 +50,9 @@ class FavoriteMoviesProvider : Fragment() {
 
     @SuppressLint("Recycle")
     private fun loadFavorite() {
-        Thread = HandlerThread("DataObserver")
-        Thread?.start()
-        val handler = Handler(Thread?.looper)
+        thread = HandlerThread("DataObserver")
+        thread!!.start()
+        val handler = Handler(thread!!.looper)
         mObserver = DataObserver(handler, context as Context)
         context?.contentResolver?.registerContentObserver(
             DBFavorite.Columns().CONTENT_URI,
@@ -68,7 +68,7 @@ class FavoriteMoviesProvider : Fragment() {
             null
         )
 
-        listFavorite = MappingHelper.maping(list as Cursor)
+        listFavorite = MappingHelper.mapping(list as Cursor)
 
         Log.d("List Provider", "$listFavorite")
 
@@ -95,5 +95,4 @@ class FavoriteMoviesProvider : Fragment() {
     }
 
     class DataObserver(handler: Handler, internal val context: Context) : ContentObserver(handler)
-
 }
