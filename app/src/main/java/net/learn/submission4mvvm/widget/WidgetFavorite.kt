@@ -8,7 +8,6 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.widget.RemoteViews
-import android.widget.Toast
 import net.learn.submission4mvvm.R
 
 /**
@@ -62,17 +61,23 @@ class WidgetFavorite : AppWidgetProvider() {
 
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
-        if (intent?.action != null) {
-            if (intent.action == toast) {
-                val viewIndex = intent.getIntExtra(exItem, 0)
-                Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
-
-                val man = AppWidgetManager.getInstance(context)
-                val ids = man.getAppWidgetIds(ComponentName(context!!, WidgetFavorite::class.java))
-                val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
-                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
-                man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
-            }
+//        if (intent?.action != null) {
+//            if (intent.action == toast) {
+//                val viewIndex = intent.getIntExtra(exItem, 0)
+//                Toast.makeText(context, "Touched view $viewIndex", Toast.LENGTH_SHORT).show()
+//
+//                val man = AppWidgetManager.getInstance(context)
+//                val ids = man.getAppWidgetIds(ComponentName(context!!, WidgetFavorite::class.java))
+//                val updateIntent = Intent(AppWidgetManager.ACTION_APPWIDGET_UPDATE)
+//                updateIntent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, ids)
+//                man.notifyAppWidgetViewDataChanged(ids, R.id.stack_view)
+//            }
+//        }
+        if (intent!!.action == AppWidgetManager.ACTION_APPWIDGET_UPDATE) {
+            val appWidgetManager = AppWidgetManager.getInstance(context)
+            val thisWidget = ComponentName(context!!, WidgetFavorite::class.java)
+            val id = appWidgetManager.getAppWidgetIds(thisWidget)
+            appWidgetManager.notifyAppWidgetViewDataChanged(id, R.id.stack_view)
         }
 
     }

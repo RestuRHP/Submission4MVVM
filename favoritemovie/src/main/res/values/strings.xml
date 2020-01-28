@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">Movie Favorite</string>
+    <string name="title_film">Title Film</string>
+    <string name="time">release</string>
+    <string name="overview">Overview</string>
+    <string name="image_rating">Image Rating</string>
+    <string name="rating">Rating</string>
+    <string name="image_lang">Image Language</string>
+    <string name="language">Language</string>
+    <string name="image_poster">Image Poster</string>
+    <string name="movies">Movies</string>
+    <string name="tvShows">Tv Shows</string>
+    <string name="favorite">Favorite</string>
+    <string name="icon_star">icon star</string>
+    <string name="image_white">image white</string>
+    <string name="lorem">-</string>
+    <string name="settings">Setting</string>
+    <string name="search">Search</string>
+    <string name="search_hint">Search Movie or Tv Shows</string>
+    <string name="not_found">Not Found</string>
+    <string name="empty_text">Data Not Found</string>
+    <string name="appwidget_text">Favorite</string>
+    <string name="image">Image</string>
+    <string-array name="search_filter_array">
+        <item>Movie</item>
+        <item>TV Show</item>
+    </string-array>
+    <string name="default_channel_id" translatable="false">fcm_default_channel</string>
+    <string name="default_channel_name" translatable="false">MovieCatalogueReminder</string>
+    <string name="daily_notif_message">Good morning, we missing you!,Tap to open</string>
+    <string name="release_notif_message">Tap! for look new film release today!</string>
+    <string name="reminder">Reminder</string>
+    <string name="toast_reminder_enabled">%1s Reminder enabled</string>
+    <string name="toast_reminder_disabled">%1s Reminder disabled</string>
+    <string name="release_reminder">Release Reminder</string>
+    <string name="daily_reminder">Daily Reminder</string>
+</resources>

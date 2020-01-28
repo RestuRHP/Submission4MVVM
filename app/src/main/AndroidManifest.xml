@@ -6,6 +6,13 @@
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
+    <permission
+        android:name="net.learn.submission4mvvm.READ_DATABASE"
+        android:protectionLevel="normal" />
+    <permission
+        android:name="net.learn.submission4mvvm.WRITE_DATABASE"
+        android:protectionLevel="normal" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/movie"
@@ -36,7 +43,9 @@
             android:name=".provider.MovieProvider"
             android:authorities="net.learn.submission4mvvm"
             android:enabled="true"
-            android:exported="true" />
+            android:exported="true"
+            android:readPermission="net.learn.submission4mvvm.READ_DATABASE"
+            android:writePermission="net.learn.submission4mvvm.WRITE_DATABASE" />
 
         <activity android:name=".ui.detail.DetailItem" />
         <activity android:name=".MainActivity">

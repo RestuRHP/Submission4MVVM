@@ -40,7 +40,6 @@ class StackRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteV
         widgetItems.addAll(helper.queryAllWidget())
         Log.d("TES123", "fav movies size" + widgetItems.size.toString())
         Binder.restoreCallingIdentity(identityToken)
-        helper.close()
     }
 
     override fun hasStableIds(): Boolean {
@@ -73,7 +72,7 @@ class StackRemoteViewsFactory(val context: Context) : RemoteViewsService.RemoteV
     }
 
     override fun onDestroy() {
-
+        helper.close()
     }
 
 }
