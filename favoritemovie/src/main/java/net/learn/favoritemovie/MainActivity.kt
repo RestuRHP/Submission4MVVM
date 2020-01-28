@@ -67,6 +67,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+    override fun onResume() {
+        super.onResume()
+        adapterBase.listFavorite.clear()
+        loadFavorite()
+    }
+
     private fun setActionBarTitle(title: String) {
         if (supportActionBar != null) {
             supportActionBar!!.title = title
