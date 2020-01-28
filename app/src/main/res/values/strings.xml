@@ -34,4 +34,5 @@
     <string name="toast_reminder_disabled">%1s Reminder disabled</string>
     <string name="release_reminder">Release Reminder</string>
     <string name="daily_reminder">Daily Reminder</string>
+    <string name="today">has been release today!</string>
 </resources>

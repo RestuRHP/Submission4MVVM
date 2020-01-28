@@ -36,7 +36,9 @@ class Receiver : BroadcastReceiver() {
     val TYPE_RELEASE = "release"
     val EXTRA_MESSAGE = "message"
     val EXTRA_TYPE = "type"
+    val GROUP = "group"
     var listMovies = ArrayList<Movie>()
+    private var loop = 0
 
     private val ID_DAILY = 101
     private val ID_RELEASE = 101
@@ -79,8 +81,9 @@ class Receiver : BroadcastReceiver() {
             override fun onResponse(call: Call<MovieObject>, response: Response<MovieObject>) {
                 val responseBody = response.body()?.results!!
                 listMovies.addAll(responseBody)
+                loop = listMovies.size
                 if (listMovies.size > 0) {
-                    showAlarmNotification(
+                    sendNotif(
                         context as Context,
                         title,
                         message,
@@ -90,6 +93,7 @@ class Receiver : BroadcastReceiver() {
                     )
                     Log.d("getReleaseToday ", ":${listMovies}")
                 }
+
             }
 
             override fun onFailure(call: Call<MovieObject>, t: Throwable) {
@@ -139,7 +143,7 @@ class Receiver : BroadcastReceiver() {
         intent.putExtra("type", type)
         if (type == TYPE_RELEASE) {
             intent.putExtra("list", movieList)
-            Log.d("tes123", "list show = $movieList")
+            Log.d("List", "list show = $movieList")
         }
         val pendingIntent =
             PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
@@ -150,6 +154,7 @@ class Receiver : BroadcastReceiver() {
             .setSmallIcon(R.mipmap.movie)
             .setLargeIcon(BitmapFactory.decodeResource(Resources.getSystem(), R.mipmap.movie))
             .setContentTitle(title)
+            .setGroup(GROUP)
             .setContentText(message)
             .setAutoCancel(true)
             .setSound(defaultSoundUri)
@@ -167,6 +172,94 @@ class Receiver : BroadcastReceiver() {
         }
         val notification = notificationBuilder.build()
         notificationManagerCompat.notify(notifId, notification)
+    }
+
+    private fun sendNotif(
+        context: Context, title: String, message: String, notifId: Int, type: String,
+        movieList: ArrayList<Movie>
+    ) {
+        val CHANNEL_ID = "0001"
+        val CHANNEL_NAME = "Today"
+        val intent = Intent(context, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+        intent.putExtra("type", type)
+        if (type == TYPE_RELEASE) {
+            intent.putExtra("list", movieList)
+            Log.d("List", "list show = $movieList")
+        }
+        val pendingIntent =
+            PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_ONE_SHOT)
+        val notificationManagerCompat =
+            context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+        val defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
+        var notificationBuilder: NotificationCompat.Builder
+
+
+        if (loop <= 20) {
+            var i = 0
+            while (i < 10) {
+                notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+                    .setContentTitle(listMovies[i].title)
+                    .setContentText(listMovies[i].title + context.getString(R.string.today))
+                    .setSmallIcon(R.mipmap.movie)
+                    .setLargeIcon(
+                        BitmapFactory.decodeResource(
+                            Resources.getSystem(),
+                            R.mipmap.movie
+                        )
+                    )
+                    .setAutoCancel(true)
+                    .setSound(defaultSoundUri)
+                    .setContentIntent(pendingIntent)
+
+
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                    val channel = NotificationChannel(
+                        CHANNEL_ID,
+                        CHANNEL_NAME,
+                        NotificationManager.IMPORTANCE_DEFAULT
+                    )
+                    channel.enableVibration(true)
+                    channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
+                    notificationBuilder.setChannelId(CHANNEL_ID)
+                    notificationManagerCompat.createNotificationChannel(channel)
+                }
+                val notification = notificationBuilder.build()
+                notificationManagerCompat.notify(i, notification)
+                i++
+            }
+        } else {
+            val inboxStyle = NotificationCompat.InboxStyle()
+                .addLine(listMovies[1].title + context.getString(R.string.today))
+                .addLine(listMovies[2].title + context.getString(R.string.today))
+                .addLine(listMovies[3].title + context.getString(R.string.today))
+                .addLine(listMovies[4].title + context.getString(R.string.today))
+                .setBigContentTitle(context.getString(R.string.release_reminder))
+                .setSummaryText(context.getString(R.string.release_reminder))
+            notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+                .setSmallIcon(R.mipmap.movie)
+                .setLargeIcon(BitmapFactory.decodeResource(Resources.getSystem(), R.mipmap.movie))
+                .setContentTitle("")
+                .setContentText("")
+                .setAutoCancel(true)
+                .setGroupSummary(true)
+                .setSound(defaultSoundUri)
+                .setStyle(inboxStyle)
+                .setContentIntent(pendingIntent)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                val channel = NotificationChannel(
+                    CHANNEL_ID,
+                    CHANNEL_NAME,
+                    NotificationManager.IMPORTANCE_DEFAULT
+                )
+                channel.enableVibration(true)
+                channel.vibrationPattern = longArrayOf(1000, 1000, 1000, 1000, 1000)
+                notificationBuilder.setChannelId(CHANNEL_ID)
+                notificationManagerCompat.createNotificationChannel(channel)
+            }
+            val notification = notificationBuilder.build()
+            notificationManagerCompat.notify(1, notification)
+        }
     }
 
     private fun isDateInvalid(date: String, format: String): Boolean {
