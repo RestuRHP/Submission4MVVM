@@ -5,9 +5,10 @@ import android.provider.BaseColumns
 
 
 class DBFavorite {
-
-    val AUTHORITY = "net.learn.submission4mvvm"
-    private val SCHEME = "content"
+    companion object {
+        const val AUTHORITY = "net.learn.submission4mvvm"
+        const val SCHEME = "content"
+    }
 
     internal class Columns : BaseColumns {
         companion object {
@@ -24,8 +25,8 @@ class DBFavorite {
             const val fTYPE = "fType"
         }
 
-        val CONTENT_URI: Uri = Uri.Builder().scheme(DBFavorite().SCHEME)
-            .authority(DBFavorite().AUTHORITY)
+        val CONTENT_URI: Uri = Uri.Builder().scheme(SCHEME)
+            .authority(AUTHORITY)
             .appendPath(TABLE_NAME)
             .build()
     }

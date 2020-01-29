@@ -24,7 +24,7 @@ import net.learn.submission4mvvm.model.movies.Movie
 import net.learn.submission4mvvm.ui.base.BaseFavoriteAdapter
 import net.learn.submission4mvvm.widget.WidgetFavorite
 
-class DetailItem : AppCompatActivity() {
+class DetailItemActivity : AppCompatActivity() {
 
     private lateinit var progressBar: ProgressBar
     private lateinit var helper: Helper

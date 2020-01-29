@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 import net.learn.submission4mvvm.BuildConfig
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
-import net.learn.submission4mvvm.ui.detail.DetailItem
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity
 
 class BaseFavoriteAdapter : RecyclerView.Adapter<BaseFavoriteAdapter.Holder>() {
 
@@ -37,15 +37,15 @@ class BaseFavoriteAdapter : RecyclerView.Adapter<BaseFavoriteAdapter.Holder>() {
                     .dontAnimate()
                     .into(img_poster)
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailItem::class.java)
-                    intent.putExtra(DetailItem.EX_FID, movies.fId)
-                    intent.putExtra(DetailItem.EX_ID, movies.id)
-                    intent.putExtra(DetailItem.EX_TITLE, movies.title)
-                    intent.putExtra(DetailItem.EX_RELEASE, movies.releaseDate)
-                    intent.putExtra(DetailItem.EX_RATING, movies.voteAverage)
-                    intent.putExtra(DetailItem.EX_LANGUAGE, movies.originalLanguage)
-                    intent.putExtra(DetailItem.EX_OVERVIEW, movies.overview)
-                    intent.putExtra(DetailItem.EX_BACKDROP, movies.backdropPath)
+                    val intent = Intent(itemView.context, DetailItemActivity::class.java)
+                    intent.putExtra(DetailItemActivity.EX_FID, movies.fId)
+                    intent.putExtra(DetailItemActivity.EX_ID, movies.id)
+                    intent.putExtra(DetailItemActivity.EX_TITLE, movies.title)
+                    intent.putExtra(DetailItemActivity.EX_RELEASE, movies.releaseDate)
+                    intent.putExtra(DetailItemActivity.EX_RATING, movies.voteAverage)
+                    intent.putExtra(DetailItemActivity.EX_LANGUAGE, movies.originalLanguage)
+                    intent.putExtra(DetailItemActivity.EX_OVERVIEW, movies.overview)
+                    intent.putExtra(DetailItemActivity.EX_BACKDROP, movies.backdropPath)
                     itemView.context.startActivity(intent)
                 }
             }

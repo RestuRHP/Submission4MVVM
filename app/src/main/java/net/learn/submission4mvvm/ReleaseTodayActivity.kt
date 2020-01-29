@@ -23,7 +23,7 @@ class ReleaseTodayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_release_today)
 
-        supportActionBar!!.title = "Today's release"
+        supportActionBar?.title = "Today's release"
 
         progressBar.visibility = View.VISIBLE
         if (intent.getSerializableExtra("list") != null) {

@@ -10,6 +10,7 @@ import net.learn.submission4mvvm.db.DBFavorite
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.TABLE_NAME
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion._ID
 import net.learn.submission4mvvm.db.DBFavorite.Columns.Companion.fTYPE
+import net.learn.submission4mvvm.db.DBFavorite.Companion.AUTHORITY
 import net.learn.submission4mvvm.db.Helper
 import net.learn.submission4mvvm.ui.favorite.tab.FavoriteMoviesProvider
 
@@ -22,9 +23,9 @@ class MovieProvider : ContentProvider() {
     lateinit var helper: Helper
 
     private fun UriMatching() {
-        sUriMatcher.addURI(DBFavorite().AUTHORITY, TABLE_NAME, MOVIE)
-        sUriMatcher.addURI(DBFavorite().AUTHORITY, "$TABLE_NAME/$fTYPE", MOVIE_TYPE)
-        sUriMatcher.addURI(DBFavorite().AUTHORITY, "$TABLE_NAME/$_ID", MOVIEID)
+        sUriMatcher.addURI(AUTHORITY, TABLE_NAME, MOVIE)
+        sUriMatcher.addURI(AUTHORITY, "$TABLE_NAME/$fTYPE", MOVIE_TYPE)
+        sUriMatcher.addURI(AUTHORITY, "$TABLE_NAME/$_ID", MOVIEID)
 
     }
 

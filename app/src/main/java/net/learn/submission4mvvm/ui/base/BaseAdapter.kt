@@ -10,15 +10,15 @@ import kotlinx.android.synthetic.main.item_movie.view.*
 import net.learn.submission4mvvm.BuildConfig
 import net.learn.submission4mvvm.R
 import net.learn.submission4mvvm.model.movies.Movie
-import net.learn.submission4mvvm.ui.detail.DetailItem
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_BACKDROP
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_ID
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_LANGUAGE
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_OVERVIEW
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_POSTER
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RATING
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_RELEASE
-import net.learn.submission4mvvm.ui.detail.DetailItem.Companion.EX_TITLE
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_BACKDROP
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_ID
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_LANGUAGE
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_OVERVIEW
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_POSTER
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_RATING
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_RELEASE
+import net.learn.submission4mvvm.ui.detail.DetailItemActivity.Companion.EX_TITLE
 import java.util.*
 
 class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
@@ -49,7 +49,7 @@ class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
                     .dontAnimate()
                     .into(img_poster)
                 itemView.setOnClickListener {
-                    val intent = Intent(itemView.context, DetailItem::class.java)
+                    val intent = Intent(itemView.context, DetailItemActivity::class.java)
                     intent.putExtra("ex_type", type)
                     intent.putExtra(EX_ID, movies.id)
                     intent.putExtra(EX_TITLE, movies.title)
@@ -64,7 +64,7 @@ class BaseAdapter : RecyclerView.Adapter<BaseAdapter.Holder>() {
             }
         }
 
-        fun checkTextIfNull(text: String?): String {
+        private fun checkTextIfNull(text: String?): String {
             return if (text != null && !text.isEmpty()) {
                 text
             } else {

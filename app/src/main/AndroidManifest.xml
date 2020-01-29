@@ -47,7 +47,7 @@
             android:readPermission="net.learn.submission4mvvm.READ_DATABASE"
             android:writePermission="net.learn.submission4mvvm.WRITE_DATABASE" />
 
-        <activity android:name=".ui.detail.DetailItem" />
+        <activity android:name=".ui.detail.DetailItemActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
