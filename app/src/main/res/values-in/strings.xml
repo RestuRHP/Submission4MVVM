@@ -70,5 +70,5 @@
     <string name="release_reminder"> Rilis Pengingat </string>
         
     <string name="daily_reminder"> Pengingat Harian </string>
-    <string name="today">telah dirilis hari ini!</string>
+    <string name="today"> telah dirilis hari ini!</string>
 </resources>

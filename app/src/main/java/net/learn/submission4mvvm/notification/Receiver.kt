@@ -195,12 +195,12 @@ class Receiver : BroadcastReceiver() {
         var notificationBuilder: NotificationCompat.Builder
 
 
-        if (loop <= 20) {
+        if (loop <= 10) {
             var i = 0
             while (i < 10) {
                 notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
                     .setContentTitle(listMovies[i].title)
-                    .setContentText(listMovies[i].title + context.getString(R.string.today))
+                    .setContentText(listMovies[i].title + " " + context.getString(R.string.today))
                     .setSmallIcon(R.mipmap.movie)
                     .setLargeIcon(
                         BitmapFactory.decodeResource(
@@ -230,10 +230,11 @@ class Receiver : BroadcastReceiver() {
             }
         } else {
             val inboxStyle = NotificationCompat.InboxStyle()
-                .addLine(listMovies[1].title + context.getString(R.string.today))
-                .addLine(listMovies[2].title + context.getString(R.string.today))
-                .addLine(listMovies[3].title + context.getString(R.string.today))
-                .addLine(listMovies[4].title + context.getString(R.string.today))
+                .addLine(listMovies[1].title + " " + context.getString(R.string.today))
+                .addLine(listMovies[2].title + " " + context.getString(R.string.today))
+                .addLine(listMovies[3].title + " " + context.getString(R.string.today))
+                .addLine(listMovies[4].title + " " + context.getString(R.string.today))
+                .addLine(listMovies[5].title + " " + context.getString(R.string.today))
                 .setBigContentTitle(context.getString(R.string.release_reminder))
                 .setSummaryText(context.getString(R.string.release_reminder))
             notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
